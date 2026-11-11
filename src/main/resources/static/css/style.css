@@ -24,7 +24,6 @@ body {
     min-height: 100vh;
 }
 
-/* Header Corporativo */
 header {
     background-color: var(--primary-dark);
     color: var(--white);
@@ -49,7 +48,6 @@ header {
     padding: 6px 10px;
     border-radius: 4px;
     font-size: 14px;
-    letter-spacing: 1px;
 }
 
 .logo-text {
@@ -72,7 +70,6 @@ nav a {
     text-decoration: none;
     font-weight: 500;
     font-size: 14px;
-    letter-spacing: 0.5px;
     transition: color 0.3s ease;
 }
 
@@ -80,16 +77,6 @@ nav a:hover {
     color: var(--accent-gold);
 }
 
-.nav-icons {
-    display: flex;
-    gap: 15px;
-    margin-left: 15px;
-    color: var(--white);
-    font-size: 16px;
-    cursor: pointer;
-}
-
-/* Hero Section */
 .hero-section {
     max-width: 1250px;
     margin: 30px auto;
@@ -107,7 +94,7 @@ nav a:hover {
 }
 
 .hero-text h1 {
-    font-size: 38px;
+    font-size: 34px;
     color: var(--primary-main);
     line-height: 1.25;
     margin-bottom: 20px;
@@ -119,13 +106,6 @@ nav a:hover {
     font-size: 16px;
     color: var(--text-muted);
     margin-bottom: 30px;
-    line-height: 1.5;
-}
-
-.hero-buttons {
-    display: flex;
-    gap: 15px;
-    flex-wrap: wrap;
 }
 
 .btn-catalog {
@@ -137,12 +117,7 @@ nav a:hover {
     font-weight: 700;
     font-size: 13px;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
-    transition: background 0.3s;
-}
-
-.btn-catalog:hover {
-    background-color: var(--primary-dark);
+    display: inline-block;
 }
 
 .btn-booking {
@@ -154,17 +129,7 @@ nav a:hover {
     font-weight: 700;
     font-size: 13px;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
-    transition: background 0.3s;
-}
-
-.btn-booking:hover {
-    background-color: var(--accent-gold-hover);
-}
-
-.hero-image-container {
-    flex: 1;
-    text-align: center;
+    display: inline-block;
 }
 
 .hero-image-container img {
@@ -173,7 +138,6 @@ nav a:hover {
     box-shadow: 0 8px 25px rgba(0,0,0,0.12);
 }
 
-/* Secciones de Contenido Principal */
 .main-container {
     max-width: 1250px;
     margin: 0 auto 50px auto;
@@ -200,12 +164,10 @@ nav a:hover {
     font-weight: 700;
     margin-bottom: 25px;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
     border-bottom: 2px solid var(--bg-light);
     padding-bottom: 10px;
 }
 
-/* Grid de Productos (Línea de Bienestar) */
 .products-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -255,14 +217,8 @@ nav a:hover {
     font-weight: bold;
     text-transform: uppercase;
     display: block;
-    transition: background 0.2s;
 }
 
-.btn-details:hover {
-    background-color: var(--accent-gold);
-}
-
-/* Grid de Servicios a Domicilio */
 .services-row {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -286,7 +242,6 @@ nav a:hover {
 .service-item p {
     font-size: 12px;
     font-weight: 600;
-    color: var(--text-dark);
 }
 
 .btn-solicitar {
@@ -301,14 +256,8 @@ nav a:hover {
     font-weight: bold;
     font-size: 13px;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
 }
 
-.btn-solicitar:hover {
-    background-color: var(--primary-dark);
-}
-
-/* Footer Corporativo Avanzado */
 footer {
     background-color: var(--primary-dark);
     color: var(--white);
@@ -330,25 +279,4 @@ footer {
     color: var(--white);
     text-decoration: none;
     opacity: 0.85;
-    transition: opacity 0.2s;
-}
-
-.footer-links a:hover {
-    opacity: 1;
-    color: var(--accent-gold);
-}
-
-.footer-badges {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-.badge-item {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    background: rgba(255,255,255,0.08);
-    padding: 5px 10px;
-    border-radius: 4px;
 }

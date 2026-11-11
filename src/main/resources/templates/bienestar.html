@@ -6,61 +6,37 @@
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-
     <header>
-        <div class="logo-area">
-            <div class="logo-badge">AW</div>
-            <a th:href="@{/}" class="logo-text">Aura Wellness & Beauty</a>
-        </div>
-        <nav>
-            <a th:href="@{/}">INICIO</a>
-            <a th:href="@{/bienestar}">LÍNEA BIENESTAR</a>
-            <a th:href="@{/estetica}">SERVICIOS ESTÉTICA</a>
-        </nav>
+        <div class="logo-area"><div class="logo-badge">AW</div><a th:href="@{/}" class="logo-text">Aura Wellness & Beauty</a></div>
+        <nav><a th:href="@{/}">INICIO</a><a th:href="@{/bienestar}">LÍNEA BIENESTAR</a><a th:href="@{/estetica}">SERVICIOS ESTÉTICA</a></nav>
     </header>
-
     <div class="main-container" style="margin-top: 40px;">
-        <h2 style="color: var(--primary-main); margin-bottom: 10px; font-size: 26px;">Catálogo Completo - Línea Bienestar</h2>
-        <p style="color: var(--text-muted); margin-bottom: 30px;">Suplementos nutricionales con entrega directa en El Agustino y Lima Este.</p>
-        
-        <div class="sections-grid" style="grid-template-columns: repeat(3, 1fr);">
+        <h2 style="color: var(--primary-main); margin-bottom: 20px;">Catálogo Completo - Línea Bienestar</h2>
+        <div class="products-grid" style="grid-template-columns: repeat(3, 1fr);">
             <div class="product-card" style="padding: 20px;">
-                <img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=300&q=80" alt="V-Organex" class="product-img" style="height: 140px;">
-                <h4 style="font-size: 16px; margin-top: 10px;">V-Organex</h4>
-                <p style="font-size: 13px; color: var(--text-muted); margin: 8px 0;">Suplemento orgánico 100% natural para energía diaria.</p>
-                <span style="font-size: 15px; font-weight: bold; color: var(--primary-main); margin-bottom: 15px;">S/ 85.00 PEN</span>
-                <a th:href="@{/}" class="btn-catalog" style="text-align: center;">Comprar Ahora</a>
+                <img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=300&q=80" alt="V-Organex" class="product-img" style="height: 130px;">
+                <h4>V-Organex</h4>
+                <p style="font-size: 12px; color: var(--text-muted); margin: 8px 0;">Suplemento orgánico natural.</p>
+                <span style="font-weight: bold; color: var(--primary-main); margin-bottom: 10px;">S/ 85.00 PEN</span>
+                <a th:href="@{/producto/detalle(nombre='V-Organex', precio='S/ 85.00 PEN')}" class="btn-catalog" style="text-align: center;">Ver Detalles</a>
             </div>
             <div class="product-card" style="padding: 20px;">
-                <img src="https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=300&q=80" alt="V-Te Detox" class="product-img" style="height: 140px;">
-                <h4 style="font-size: 16px; margin-top: 10px;">V-Te Detox</h4>
-                <p style="font-size: 13px; color: var(--text-muted); margin: 8px 0;">Infusión purificante ideal para limpieza metabólica.</p>
-                <span style="font-size: 15px; font-weight: bold; color: var(--primary-main); margin-bottom: 15px;">S/ 60.00 PEN</span>
-                <a th:href="@{/}" class="btn-catalog" style="text-align: center;">Comprar Ahora</a>
+                <img src="https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=300&q=80" alt="V-Te Detox" class="product-img" style="height: 130px;">
+                <h4>V-Te Detox</h4>
+                <p style="font-size: 12px; color: var(--text-muted); margin: 8px 0;">Infusión purificante.</p>
+                <span style="font-weight: bold; color: var(--primary-main); margin-bottom: 10px;">S/ 60.00 PEN</span>
+                <a th:href="@{/producto/detalle(nombre='V-Te Detox', precio='S/ 60.00 PEN')}" class="btn-catalog" style="text-align: center;">Ver Detalles</a>
             </div>
             <div class="product-card" style="padding: 20px;">
-                <img src="https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=300&q=80" alt="V-Nrgy" class="product-img" style="height: 140px;">
-                <h4 style="font-size: 16px; margin-top: 10px;">V-Nrgy</h4>
-                <p style="font-size: 13px; color: var(--text-muted); margin: 8px 0;">Complejo multivitamínico avanzado para rendimiento óptimo.</p>
-                <span style="font-size: 15px; font-weight: bold; color: var(--primary-main); margin-bottom: 15px;">S/ 95.00 PEN</span>
-                <a th:href="@{/}" class="btn-catalog" style="text-align: center;">Comprar Ahora</a>
+                <img src="https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=300&q=80" alt="V-Nrgy" class="product-img" style="height: 130px;">
+                <h4>V-Nrgy</h4>
+                <p style="font-size: 12px; color: var(--text-muted); margin: 8px 0;">Multivitamínico avanzado.</p>
+                <span style="font-weight: bold; color: var(--primary-main); margin-bottom: 10px;">S/ 95.00 PEN</span>
+                <a th:href="@{/producto/detalle(nombre='V-Nrgy', precio='S/ 95.00 PEN')}" class="btn-catalog" style="text-align: center;">Ver Detalles</a>
             </div>
         </div>
-
-        <div style="margin-top: 40px; text-align: center;">
-            <a th:href="@{/}" class="btn-booking">Volver a la Página Principal</a>
-        </div>
+        <div style="margin-top: 30px; text-align: center;"><a th:href="@{/}" class="btn-booking">Volver al Inicio</a></div>
     </div>
-
-    <footer>
-        <div class="footer-links">
-            <a href="#">POLÍTICA DE PRIVACIDAD</a>
-            <a href="#">TÉRMINOS Y CONDICIONES</a>
-        </div>
-        <div class="footer-badges">
-            <div class="badge-item">🛡️ VERIFIED DISTRIBUTOR</div>
-        </div>
-    </footer>
-
+    <footer><div>POLÍTICA DE PRIVACIDAD</div><div>🛡️ VERIFIED</div></footer>
 </body>
 </html>

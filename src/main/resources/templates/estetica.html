@@ -6,61 +6,37 @@
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-
     <header>
-        <div class="logo-area">
-            <div class="logo-badge">AW</div>
-            <a th:href="@{/}" class="logo-text">Aura Wellness & Beauty</a>
-        </div>
-        <nav>
-            <a th:href="@{/}">INICIO</a>
-            <a th:href="@{/bienestar}">LÍNEA BIENESTAR</a>
-            <a th:href="@{/estetica}">SERVICIOS ESTÉTICA</a>
-        </nav>
+        <div class="logo-area"><div class="logo-badge">AW</div><a th:href="@{/}" class="logo-text">Aura Wellness & Beauty</a></div>
+        <nav><a th:href="@{/}">INICIO</a><a th:href="@{/bienestar}">LÍNEA BIENESTAR</a><a th:href="@{/estetica}">SERVICIOS ESTÉTICA</a></nav>
     </header>
-
     <div class="main-container" style="margin-top: 40px;">
-        <h2 style="color: var(--primary-main); margin-bottom: 10px; font-size: 26px;">Servicios de Estética a Domicilio</h2>
-        <p style="color: var(--text-muted); margin-bottom: 30px;">Profesionales especializados en El Agustino y Lima Este.</p>
-        
-        <div class="sections-grid" style="grid-template-columns: repeat(3, 1fr);">
+        <h2 style="color: var(--primary-main); margin-bottom: 20px;">Servicios de Estética a Domicilio</h2>
+        <div class="products-grid" style="grid-template-columns: repeat(3, 1fr);">
             <div class="product-card" style="padding: 20px;">
-                <div style="font-size: 40px; margin-bottom: 15px;">💅</div>
-                <h4 style="font-size: 16px; margin-top: 10px;">Manicura Profesional</h4>
-                <p style="font-size: 13px; color: var(--text-muted); margin: 8px 0;">Cuidado integral y esmaltado premium a domicilio.</p>
-                <span style="font-size: 15px; font-weight: bold; color: var(--primary-main); margin-bottom: 15px;">S/ 45.00 PEN</span>
-                <a th:href="@{/}" class="btn-booking" style="text-align: center;">Agendar Cita</a>
+                <div style="font-size: 35px; margin-bottom: 10px;">💅</div>
+                <h4>Manicura Profesional</h4>
+                <p style="font-size: 12px; color: var(--text-muted); margin: 8px 0;">Esmaltado premium.</p>
+                <span style="font-weight: bold; color: var(--primary-main); margin-bottom: 10px;">S/ 45.00 PEN</span>
+                <a th:href="@{/producto/detalle(nombre='Manicura Profesional', precio='S/ 45.00 PEN')}" class="btn-booking" style="text-align: center;">Agendar Cita</a>
             </div>
             <div class="product-card" style="padding: 20px;">
-                <div style="font-size: 40px; margin-bottom: 15px;">👁️</div>
-                <h4 style="font-size: 16px; margin-top: 10px;">Extensiones de Pestañas</h4>
-                <p style="font-size: 13px; color: var(--text-muted); margin: 8px 0;">Técnica pelo a pelo para una mirada natural y duradera.</p>
-                <span style="font-size: 15px; font-weight: bold; color: var(--primary-main); margin-bottom: 15px;">S/ 70.00 PEN</span>
-                <a th:href="@{/}" class="btn-booking" style="text-align: center;">Agendar Cita</a>
+                <div style="font-size: 35px; margin-bottom: 10px;">👁️</div>
+                <h4>Extensiones de Pestañas</h4>
+                <p style="font-size: 12px; color: var(--text-muted); margin: 8px 0;">Técnica pelo a pelo.</p>
+                <span style="font-weight: bold; color: var(--primary-main); margin-bottom: 10px;">S/ 70.00 PEN</span>
+                <a th:href="@{/producto/detalle(nombre='Extensiones de Pestanas', precio='S/ 70.00 PEN')}" class="btn-booking" style="text-align: center;">Agendar Cita</a>
             </div>
             <div class="product-card" style="padding: 20px;">
-                <div style="font-size: 40px; margin-bottom: 15px;">✨</div>
-                <h4 style="font-size: 16px; margin-top: 10px;">Pedicura Spa</h4>
-                <p style="font-size: 13px; color: var(--text-muted); margin: 8px 0;">Exfoliación, relajación y cuidado estético especializado.</p>
-                <span style="font-size: 15px; font-weight: bold; color: var(--primary-main); margin-bottom: 15px;">S/ 55.00 PEN</span>
-                <a th:href="@{/}" class="btn-booking" style="text-align: center;">Agendar Cita</a>
+                <div style="font-size: 35px; margin-bottom: 10px;">✨</div>
+                <h4>Pedicura Spa</h4>
+                <p style="font-size: 12px; color: var(--text-muted); margin: 8px 0;">Exfoliación y relajación.</p>
+                <span style="font-weight: bold; color: var(--primary-main); margin-bottom: 10px;">S/ 55.00 PEN</span>
+                <a th:href="@{/producto/detalle(nombre='Pedicura Spa', precio='S/ 55.00 PEN')}" class="btn-booking" style="text-align: center;">Agendar Cita</a>
             </div>
         </div>
-
-        <div style="margin-top: 40px; text-align: center;">
-            <a th:href="@{/}" class="btn-catalog">Volver a la Página Principal</a>
-        </div>
+        <div style="margin-top: 30px; text-align: center;"><a th:href="@{/}" class="btn-catalog">Volver al Inicio</a></div>
     </div>
-
-    <footer>
-        <div class="footer-links">
-            <a href="#">POLÍTICA DE PRIVACIDAD</a>
-            <a href="#">TÉRMINOS Y CONDICIONES</a>
-        </div>
-        <div class="footer-badges">
-            <div class="badge-item">🛡️ VERIFIED DISTRIBUTOR</div>
-        </div>
-    </footer>
-
+    <footer><div>POLÍTICA DE PRIVACIDAD</div><div>🛡️ VERIFIED</div></footer>
 </body>
 </html>

@@ -2,12 +2,11 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Aura Wellness & Beauty - Plataforma Corporativa</title>
+    <title>Aura Wellness & Beauty - Inicio</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
 
-    <!-- Header Profesional -->
     <header>
         <div class="logo-area">
             <div class="logo-badge">AW</div>
@@ -17,36 +16,26 @@
             <a th:href="@{/}">INICIO</a>
             <a th:href="@{/bienestar}">LÍNEA BIENESTAR</a>
             <a th:href="@{/estetica}">SERVICIOS ESTÉTICA</a>
-            <a href="#">CALIDAD & SEGURIDAD</a>
-            <a href="#">CONTACTO LEGAL</a>
-            <div class="nav-icons">
-                <span>🔍</span>
-                <span>🛒</span>
-                <span>🔒 SSL</span>
-            </div>
         </nav>
     </header>
 
-    <!-- Hero Section -->
     <section class="hero-section">
         <div class="hero-text">
-            <h1>Bienestar Integral y Estética Profesional. Delivery a domicilio en El Agustino.</h1>
-            <p>Disfruta de suplementos nutricionales de alta calidad y servicios de estética directamente en la comodidad de tu hogar en Lima Este.</p>
-            <div class="hero-buttons">
+            <h1>Bienestar Integral y Estética Profesional. Delivery en El Agustino.</h1>
+            <p>Disfruta de suplementos nutricionales y servicios de estética directamente en la comodidad de tu hogar en Lima Este.</p>
+            <div style="display: flex; gap: 15px;">
                 <a th:href="@{/bienestar}" class="btn-catalog">Explorar Catálogo de Salud</a>
                 <a th:href="@{/estetica}" class="btn-booking">Agendar Cita de Belleza</a>
             </div>
         </div>
         <div class="hero-image-container">
-            <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=650&q=80" alt="Estética y Bienestar">
+            <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=650&q=80" alt="Estética">
         </div>
     </section>
 
-    <!-- Secciones Principales (Línea de Bienestar y Servicios) -->
     <div class="main-container">
         <div class="sections-grid">
             
-            <!-- Columna 1: Nuestra Línea de Bienestar -->
             <div class="section-box">
                 <h3 class="section-heading">Nuestra Línea de Bienestar</h3>
                 <div class="products-grid">
@@ -54,43 +43,30 @@
                         <img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=200&q=80" alt="V-Organex" class="product-img">
                         <h4>V-Organex</h4>
                         <span>S/ 85.00 PEN</span>
-                        <a th:href="@{/bienestar}" class="btn-details">Ver Detalles</a>
+                        <a th:href="@{/producto/detalle(nombre='V-Organex', precio='S/ 85.00 PEN')}" class="btn-details">Ver Detalles</a>
                     </div>
                     <div class="product-card">
                         <img src="https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=200&q=80" alt="V-Te Detox" class="product-img">
                         <h4>V-Te Detox</h4>
                         <span>S/ 60.00 PEN</span>
-                        <a th:href="@{/bienestar}" class="btn-details">Ver Detalles</a>
+                        <a th:href="@{/producto/detalle(nombre='V-Te Detox', precio='S/ 60.00 PEN')}" class="btn-details">Ver Detalles</a>
                     </div>
                     <div class="product-card">
                         <img src="https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=200&q=80" alt="V-Nrgy" class="product-img">
                         <h4>V-Nrgy</h4>
                         <span>S/ 95.00 PEN</span>
-                        <a th:href="@{/bienestar}" class="btn-details">Ver Detalles</a>
+                        <a th:href="@{/producto/detalle(nombre='V-Nrgy', precio='S/ 95.00 PEN')}" class="btn-details">Ver Detalles</a>
                     </div>
                 </div>
             </div>
 
-            <!-- Columna 2: Servicios a Domicilio -->
             <div class="section-box">
                 <h3 class="section-heading">Servicios a Domicilio</h3>
                 <div class="services-row">
-                    <div class="service-item">
-                        <div class="service-icon">💅</div>
-                        <p>Manicura</p>
-                    </div>
-                    <div class="service-item">
-                        <div class="service-icon">👁️</div>
-                        <p>Pestañas</p>
-                    </div>
-                    <div class="service-item">
-                        <div class="service-icon">✨</div>
-                        <p>Pedicura</p>
-                    </div>
-                    <div class="service-item">
-                        <div class="service-icon">💆‍♀️</div>
-                        <p>Spa Facial</p>
-                    </div>
+                    <div class="service-item"><div class="service-icon">💅</div><p>Manicura</p></div>
+                    <div class="service-item"><div class="service-icon">👁️</div><p>Pestañas</p></div>
+                    <div class="service-item"><div class="service-icon">✨</div><p>Pedicura</p></div>
+                    <div class="service-item"><div class="service-icon">💆‍♀️</div><p>Spa Facial</p></div>
                 </div>
                 <a th:href="@{/estetica}" class="btn-solicitar">Solicitar Ahora</a>
             </div>
@@ -98,18 +74,9 @@
         </div>
     </div>
 
-    <!-- Footer Avanzado -->
     <footer>
-        <div class="footer-links">
-            <a href="#">POLÍTICA DE PRIVACIDAD</a>
-            <a href="#">TÉRMINOS Y CONDICIONES</a>
-            <a href="#">AVISO LEGAL</a>
-            <a href="#">CERTIFICADO SSL/TLS ACTIVE</a>
-        </div>
-        <div class="footer-badges">
-            <div class="badge-item">🛡️ VERIFIED DISTRIBUTOR</div>
-            <div class="badge-item">🔒 SSL SECURE</div>
-        </div>
+        <div class="footer-links"><a href="#">POLÍTICA DE PRIVACIDAD</a><a href="#">TÉRMINOS Y CONDICIONES</a></div>
+        <div>🛡️ VERIFIED DISTRIBUTOR</div>
     </footer>
 
 </body>
