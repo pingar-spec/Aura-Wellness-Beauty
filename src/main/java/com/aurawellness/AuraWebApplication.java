@@ -1,4 +1,4 @@
-package com.aurawellness;
+package main.java.com.aurawellness;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
