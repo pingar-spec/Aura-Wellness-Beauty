@@ -7,17 +7,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class WebController {
 
     @GetMapping("/")
-    public String index() {
-        return "index";
+    public String home() {
+        return "index"; // Renderiza la página principal (index.html)
     }
 
-    @GetMapping("/bienestar")
-    public String bienestar() {
-        return "bienestar";
+    @GetMapping("/catalogo")
+    public String catalogo() {
+        return "catalogo"; // Renderiza la vista del catálogo de salud
     }
 
-    @GetMapping("/estetica")
-    public String estetica() {
-        return "estetica";
+    @GetMapping("/servicios")
+    public String servicios() {
+        return "servicios"; // Renderiza la vista de los servicios de estética
     }
 }
