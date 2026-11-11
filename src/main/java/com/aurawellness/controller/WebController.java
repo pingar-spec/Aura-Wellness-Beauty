@@ -8,16 +8,16 @@ public class WebController {
 
     @GetMapping("/")
     public String home() {
-        return "index"; // Carga index.html
+        return "index";
     }
 
     @GetMapping("/bienestar")
     public String bienestar() {
-        return "bienestar"; // Carga bienestar.html
+        return "bienestar";
     }
 
     @GetMapping("/estetica")
     public String estetica() {
-        return "estetica"; // Carga estetica.html
+        return "estetica";
     }
 }

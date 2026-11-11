@@ -1,14 +1,54 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <link rel="stylesheet" th:href="@{/css/style.css}">
     <meta charset="UTF-8">
-    <title>Servicios de Estética - Aura Wellness & Beauty</title>
+    <title>Servicios Estética - Aura Wellness & Beauty</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-    <h1>Servicios de Estética a Domicilio</h1>
-    <p>Agenda tus tratamientos profesionales de belleza directamente en la comodidad de tu hogar.</p>
-    <br>
-    <a th:href="@{/}">Volver al Inicio</a>
+
+    <header>
+        <div class="logo">Aura Wellness & Beauty</div>
+        <nav>
+            <a th:href="@{/}">Inicio</a>
+            <a th:href="@{/bienestar}">Línea Bienestar</a>
+            <a th:href="@{/estetica}">Servicios Estética</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h2 class="section-title">Servicios de Estética a Domicilio</h2>
+        <p style="text-align: center; color: #666; margin-bottom: 30px;">Profesionales certificados llegan hasta la puerta de tu hogar en El Agustino.</p>
+        
+        <div class="grid">
+            <div class="card">
+                <h3>Manicura Profesional</h3>
+                <p>Cuidado integral, esmaltado y diseño de manos con insumos premium.</p>
+                <div class="price">S/ 45.00</div>
+                <a th:href="@{/}" class="btn-secondary" style="padding: 8px 16px; font-size: 14px;">Agendar Cita</a>
+            </div>
+            <div class="card">
+                <h3>Extensiones de Pestañas</h3>
+                <p>Técnica pelo a pelo para una mirada natural y cautivadora.</p>
+                <div class="price">S/ 70.00</div>
+                <a th:href="@{/}" class="btn-secondary" style="padding: 8px 16px; font-size: 14px;">Agendar Cita</a>
+            </div>
+            <div class="card">
+                <h3>Pedicura Spa</h3>
+                <p>Relajación profunda, exfoliación y cuidado estético especializado de pies.</p>
+                <div class="price">S/ 55.00</div>
+                <a th:href="@{/}" class="btn-secondary" style="padding: 8px 16px; font-size: 14px;">Agendar Cita</a>
+            </div>
+        </div>
+        
+        <div style="text-align: center; margin-top: 20px;">
+            <a th:href="@{/}" class="btn-primary">Volver al Inicio</a>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Aura Wellness & Beauty - El Agustino, Lima.</p>
+    </footer>
+
 </body>
 </html>

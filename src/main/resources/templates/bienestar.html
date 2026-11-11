@@ -1,14 +1,54 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <link rel="stylesheet" th:href="@{/css/style.css}">
     <meta charset="UTF-8">
     <title>Línea Bienestar - Aura Wellness & Beauty</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-    <h1>Línea de Bienestar y Suplementos</h1>
-    <p>Conoce nuestra gama de productos orientados a mejorar tu salud física y nutrición en El Agustino, Lima.</p>
-    <br>
-    <a th:href="@{/}">Volver al Inicio</a>
+
+    <header>
+        <div class="logo">Aura Wellness & Beauty</div>
+        <nav>
+            <a th:href="@{/}">Inicio</a>
+            <a th:href="@{/bienestar}">Línea Bienestar</a>
+            <a th:href="@{/estetica}">Servicios Estética</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h2 class="section-title">Catálogo Completo de Línea Bienestar</h2>
+        <p style="text-align: center; color: #666; margin-bottom: 30px;">Envíos rápidos y seguros a domicilio en El Agustino y todo Lima Este.</p>
+        
+        <div class="grid">
+            <div class="card">
+                <h3>V-Organex</h3>
+                <p>Suplemento orgánico con extractos naturales para potenciar tus defensas.</p>
+                <div class="price">S/ 85.00</div>
+                <a th:href="@{/}" class="btn-primary" style="padding: 8px 16px; font-size: 14px;">Comprar Ahora</a>
+            </div>
+            <div class="card">
+                <h3>V-Te Detox</h3>
+                <p>Té depurativo y antioxidante para el equilibrio digestivo diario.</p>
+                <div class="price">S/ 60.00</div>
+                <a th:href="@{/}" class="btn-primary" style="padding: 8px 16px; font-size: 14px;">Comprar Ahora</a>
+            </div>
+            <div class="card">
+                <h3>V-Nrgy</h3>
+                <p>Energizante natural para mantener tu vitalidad durante toda la jornada.</p>
+                <div class="price">S/ 95.00</div>
+                <a th:href="@{/}" class="btn-primary" style="padding: 8px 16px; font-size: 14px;">Comprar Ahora</a>
+            </div>
+        </div>
+        
+        <div style="text-align: center; margin-top: 20px;">
+            <a th:href="@{/}" class="btn-primary">Volver al Inicio</a>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Aura Wellness & Beauty - El Agustino, Lima.</p>
+    </footer>
+
 </body>
 </html>
