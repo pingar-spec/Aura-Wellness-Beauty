@@ -2,60 +2,114 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Aura Wellness & Beauty - Inicio</title>
+    <title>Aura Wellness & Beauty - Plataforma Corporativa</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
 
+    <!-- Header Profesional -->
     <header>
-        <a th:href="@{/}" class="logo">Aura Wellness & Beauty</a>
+        <div class="logo-area">
+            <div class="logo-badge">AW</div>
+            <a th:href="@{/}" class="logo-text">Aura Wellness & Beauty</a>
+        </div>
         <nav>
-            <a th:href="@{/}">Inicio</a>
-            <a th:href="@{/bienestar}">Línea Bienestar</a>
-            <a th:href="@{/estetica}">Servicios Estética</a>
+            <a th:href="@{/}">INICIO</a>
+            <a th:href="@{/bienestar}">LÍNEA BIENESTAR</a>
+            <a th:href="@{/estetica}">SERVICIOS ESTÉTICA</a>
+            <a href="#">CALIDAD & SEGURIDAD</a>
+            <a href="#">CONTACTO LEGAL</a>
+            <div class="nav-icons">
+                <span>🔍</span>
+                <span>🛒</span>
+                <span>🔒 SSL</span>
+            </div>
         </nav>
     </header>
 
-    <div class="hero">
-        <div class="hero-content">
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-text">
             <h1>Bienestar Integral y Estética Profesional. Delivery a domicilio en El Agustino.</h1>
             <p>Disfruta de suplementos nutricionales de alta calidad y servicios de estética directamente en la comodidad de tu hogar en Lima Este.</p>
-            <div>
-                <a th:href="@{/bienestar}" class="btn-primary">Explorar Catálogo de Salud</a>
-                <a th:href="@{/estetica}" class="btn-secondary">Agendar Cita de Belleza</a>
+            <div class="hero-buttons">
+                <a th:href="@{/bienestar}" class="btn-catalog">Explorar Catálogo de Salud</a>
+                <a th:href="@{/estetica}" class="btn-booking">Agendar Cita de Belleza</a>
             </div>
         </div>
-        <div class="hero-image">
-            <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=600&q=80" alt="Estética y Bienestar">
+        <div class="hero-image-container">
+            <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=650&q=80" alt="Estética y Bienestar">
+        </div>
+    </section>
+
+    <!-- Secciones Principales (Línea de Bienestar y Servicios) -->
+    <div class="main-container">
+        <div class="sections-grid">
+            
+            <!-- Columna 1: Nuestra Línea de Bienestar -->
+            <div class="section-box">
+                <h3 class="section-heading">Nuestra Línea de Bienestar</h3>
+                <div class="products-grid">
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=200&q=80" alt="V-Organex" class="product-img">
+                        <h4>V-Organex</h4>
+                        <span>S/ 85.00 PEN</span>
+                        <a th:href="@{/bienestar}" class="btn-details">Ver Detalles</a>
+                    </div>
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=200&q=80" alt="V-Te Detox" class="product-img">
+                        <h4>V-Te Detox</h4>
+                        <span>S/ 60.00 PEN</span>
+                        <a th:href="@{/bienestar}" class="btn-details">Ver Detalles</a>
+                    </div>
+                    <div class="product-card">
+                        <img src="https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=200&q=80" alt="V-Nrgy" class="product-img">
+                        <h4>V-Nrgy</h4>
+                        <span>S/ 95.00 PEN</span>
+                        <a th:href="@{/bienestar}" class="btn-details">Ver Detalles</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Columna 2: Servicios a Domicilio -->
+            <div class="section-box">
+                <h3 class="section-heading">Servicios a Domicilio</h3>
+                <div class="services-row">
+                    <div class="service-item">
+                        <div class="service-icon">💅</div>
+                        <p>Manicura</p>
+                    </div>
+                    <div class="service-item">
+                        <div class="service-icon">👁️</div>
+                        <p>Pestañas</p>
+                    </div>
+                    <div class="service-item">
+                        <div class="service-icon">✨</div>
+                        <p>Pedicura</p>
+                    </div>
+                    <div class="service-item">
+                        <div class="service-icon">💆‍♀️</div>
+                        <p>Spa Facial</p>
+                    </div>
+                </div>
+                <a th:href="@{/estetica}" class="btn-solicitar">Solicitar Ahora</a>
+            </div>
+
         </div>
     </div>
 
-    <div class="container">
-        <h2 class="section-title">Nuestra Línea de Bienestar Destacada</h2>
-        <div class="grid">
-            <div class="card">
-                <h3>V-Organex</h3>
-                <p>Suplemento orgánico 100% natural para potenciar tu energía y defensas diarias.</p>
-                <div class="price">S/ 85.00</div>
-                <a th:href="@{/bienestar}" class="btn-primary" style="padding: 8px 16px; font-size: 14px;">Ver Detalles</a>
-            </div>
-            <div class="card">
-                <h3>V-Te Detox</h3>
-                <p>Infusión purificante ideal para limpieza metabólica y bienestar digestivo.</p>
-                <div class="price">S/ 60.00</div>
-                <a th:href="@{/bienestar}" class="btn-primary" style="padding: 8px 16px; font-size: 14px;">Ver Detalles</a>
-            </div>
-            <div class="card">
-                <h3>V-Nrgy</h3>
-                <p>Complejo multivitamínico avanzado para rendimiento físico y mental óptimo.</p>
-                <div class="price">S/ 95.00</div>
-                <a th:href="@{/bienestar}" class="btn-primary" style="padding: 8px 16px; font-size: 14px;">Ver Detalles</a>
-            </div>
-        </div>
-    </div>
-
+    <!-- Footer Avanzado -->
     <footer>
-        <p>&copy; 2026 Aura Wellness & Beauty - El Agustino, Lima. Todos los derechos reservados.</p>
+        <div class="footer-links">
+            <a href="#">POLÍTICA DE PRIVACIDAD</a>
+            <a href="#">TÉRMINOS Y CONDICIONES</a>
+            <a href="#">AVISO LEGAL</a>
+            <a href="#">CERTIFICADO SSL/TLS ACTIVE</a>
+        </div>
+        <div class="footer-badges">
+            <div class="badge-item">🛡️ VERIFIED DISTRIBUTOR</div>
+            <div class="badge-item">🔒 SSL SECURE</div>
+        </div>
     </footer>
 
 </body>

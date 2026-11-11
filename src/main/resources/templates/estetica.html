@@ -8,46 +8,58 @@
 <body>
 
     <header>
-        <a th:href="@{/}" class="logo">Aura Wellness & Beauty</a>
+        <div class="logo-area">
+            <div class="logo-badge">AW</div>
+            <a th:href="@{/}" class="logo-text">Aura Wellness & Beauty</a>
+        </div>
         <nav>
-            <a th:href="@{/}">Inicio</a>
-            <a th:href="@{/bienestar}">Línea Bienestar</a>
-            <a th:href="@{/estetica}">Servicios Estética</a>
+            <a th:href="@{/}">INICIO</a>
+            <a th:href="@{/bienestar}">LÍNEA BIENESTAR</a>
+            <a th:href="@{/estetica}">SERVICIOS ESTÉTICA</a>
         </nav>
     </header>
 
-    <div class="container">
-        <h2 class="section-title">Servicios de Estética a Domicilio</h2>
-        <p style="text-align: center; color: #666; margin-bottom: 30px;">Profesionales certificados llegan hasta la puerta de tu hogar en El Agustino.</p>
+    <div class="main-container" style="margin-top: 40px;">
+        <h2 style="color: var(--primary-main); margin-bottom: 10px; font-size: 26px;">Servicios de Estética a Domicilio</h2>
+        <p style="color: var(--text-muted); margin-bottom: 30px;">Profesionales especializados en El Agustino y Lima Este.</p>
         
-        <div class="grid">
-            <div class="card">
-                <h3>Manicura Profesional</h3>
-                <p>Cuidado integral, esmaltado y diseño de manos con insumos premium.</p>
-                <div class="price">S/ 45.00</div>
-                <a th:href="@{/}" class="btn-secondary" style="padding: 8px 16px; font-size: 14px;">Agendar Cita</a>
+        <div class="sections-grid" style="grid-template-columns: repeat(3, 1fr);">
+            <div class="product-card" style="padding: 20px;">
+                <div style="font-size: 40px; margin-bottom: 15px;">💅</div>
+                <h4 style="font-size: 16px; margin-top: 10px;">Manicura Profesional</h4>
+                <p style="font-size: 13px; color: var(--text-muted); margin: 8px 0;">Cuidado integral y esmaltado premium a domicilio.</p>
+                <span style="font-size: 15px; font-weight: bold; color: var(--primary-main); margin-bottom: 15px;">S/ 45.00 PEN</span>
+                <a th:href="@{/}" class="btn-booking" style="text-align: center;">Agendar Cita</a>
             </div>
-            <div class="card">
-                <h3>Extensiones de Pestañas</h3>
-                <p>Técnica pelo a pelo para una mirada natural y cautivadora.</p>
-                <div class="price">S/ 70.00</div>
-                <a th:href="@{/}" class="btn-secondary" style="padding: 8px 16px; font-size: 14px;">Agendar Cita</a>
+            <div class="product-card" style="padding: 20px;">
+                <div style="font-size: 40px; margin-bottom: 15px;">👁️</div>
+                <h4 style="font-size: 16px; margin-top: 10px;">Extensiones de Pestañas</h4>
+                <p style="font-size: 13px; color: var(--text-muted); margin: 8px 0;">Técnica pelo a pelo para una mirada natural y duradera.</p>
+                <span style="font-size: 15px; font-weight: bold; color: var(--primary-main); margin-bottom: 15px;">S/ 70.00 PEN</span>
+                <a th:href="@{/}" class="btn-booking" style="text-align: center;">Agendar Cita</a>
             </div>
-            <div class="card">
-                <h3>Pedicura Spa</h3>
-                <p>Relajación profunda, exfoliación y cuidado estético especializado de pies.</p>
-                <div class="price">S/ 55.00</div>
-                <a th:href="@{/}" class="btn-secondary" style="padding: 8px 16px; font-size: 14px;">Agendar Cita</a>
+            <div class="product-card" style="padding: 20px;">
+                <div style="font-size: 40px; margin-bottom: 15px;">✨</div>
+                <h4 style="font-size: 16px; margin-top: 10px;">Pedicura Spa</h4>
+                <p style="font-size: 13px; color: var(--text-muted); margin: 8px 0;">Exfoliación, relajación y cuidado estético especializado.</p>
+                <span style="font-size: 15px; font-weight: bold; color: var(--primary-main); margin-bottom: 15px;">S/ 55.00 PEN</span>
+                <a th:href="@{/}" class="btn-booking" style="text-align: center;">Agendar Cita</a>
             </div>
         </div>
-        
-        <div style="text-align: center; margin-top: 20px;">
-            <a th:href="@{/}" class="btn-primary">Volver al Inicio</a>
+
+        <div style="margin-top: 40px; text-align: center;">
+            <a th:href="@{/}" class="btn-catalog">Volver a la Página Principal</a>
         </div>
     </div>
 
     <footer>
-        <p>&copy; 2026 Aura Wellness & Beauty - El Agustino, Lima.</p>
+        <div class="footer-links">
+            <a href="#">POLÍTICA DE PRIVACIDAD</a>
+            <a href="#">TÉRMINOS Y CONDICIONES</a>
+        </div>
+        <div class="footer-badges">
+            <div class="badge-item">🛡️ VERIFIED DISTRIBUTOR</div>
+        </div>
     </footer>
 
 </body>

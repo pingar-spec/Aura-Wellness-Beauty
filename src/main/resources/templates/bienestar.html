@@ -8,46 +8,58 @@
 <body>
 
     <header>
-        <a th:href="@{/}" class="logo">Aura Wellness & Beauty</a>
+        <div class="logo-area">
+            <div class="logo-badge">AW</div>
+            <a th:href="@{/}" class="logo-text">Aura Wellness & Beauty</a>
+        </div>
         <nav>
-            <a th:href="@{/}">Inicio</a>
-            <a th:href="@{/bienestar}">Línea Bienestar</a>
-            <a th:href="@{/estetica}">Servicios Estética</a>
+            <a th:href="@{/}">INICIO</a>
+            <a th:href="@{/bienestar}">LÍNEA BIENESTAR</a>
+            <a th:href="@{/estetica}">SERVICIOS ESTÉTICA</a>
         </nav>
     </header>
 
-    <div class="container">
-        <h2 class="section-title">Catálogo Completo de Línea Bienestar</h2>
-        <p style="text-align: center; color: #666; margin-bottom: 30px;">Envíos rápidos y seguros a domicilio en El Agustino y todo Lima Este.</p>
+    <div class="main-container" style="margin-top: 40px;">
+        <h2 style="color: var(--primary-main); margin-bottom: 10px; font-size: 26px;">Catálogo Completo - Línea Bienestar</h2>
+        <p style="color: var(--text-muted); margin-bottom: 30px;">Suplementos nutricionales con entrega directa en El Agustino y Lima Este.</p>
         
-        <div class="grid">
-            <div class="card">
-                <h3>V-Organex</h3>
-                <p>Suplemento orgánico con extractos naturales para potenciar tus defensas.</p>
-                <div class="price">S/ 85.00</div>
-                <a th:href="@{/}" class="btn-primary" style="padding: 8px 16px; font-size: 14px;">Comprar Ahora</a>
+        <div class="sections-grid" style="grid-template-columns: repeat(3, 1fr);">
+            <div class="product-card" style="padding: 20px;">
+                <img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=300&q=80" alt="V-Organex" class="product-img" style="height: 140px;">
+                <h4 style="font-size: 16px; margin-top: 10px;">V-Organex</h4>
+                <p style="font-size: 13px; color: var(--text-muted); margin: 8px 0;">Suplemento orgánico 100% natural para energía diaria.</p>
+                <span style="font-size: 15px; font-weight: bold; color: var(--primary-main); margin-bottom: 15px;">S/ 85.00 PEN</span>
+                <a th:href="@{/}" class="btn-catalog" style="text-align: center;">Comprar Ahora</a>
             </div>
-            <div class="card">
-                <h3>V-Te Detox</h3>
-                <p>Té depurativo y antioxidante para el equilibrio digestivo diario.</p>
-                <div class="price">S/ 60.00</div>
-                <a th:href="@{/}" class="btn-primary" style="padding: 8px 16px; font-size: 14px;">Comprar Ahora</a>
+            <div class="product-card" style="padding: 20px;">
+                <img src="https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=300&q=80" alt="V-Te Detox" class="product-img" style="height: 140px;">
+                <h4 style="font-size: 16px; margin-top: 10px;">V-Te Detox</h4>
+                <p style="font-size: 13px; color: var(--text-muted); margin: 8px 0;">Infusión purificante ideal para limpieza metabólica.</p>
+                <span style="font-size: 15px; font-weight: bold; color: var(--primary-main); margin-bottom: 15px;">S/ 60.00 PEN</span>
+                <a th:href="@{/}" class="btn-catalog" style="text-align: center;">Comprar Ahora</a>
             </div>
-            <div class="card">
-                <h3>V-Nrgy</h3>
-                <p>Energizante natural para mantener tu vitalidad durante toda la jornada.</p>
-                <div class="price">S/ 95.00</div>
-                <a th:href="@{/}" class="btn-primary" style="padding: 8px 16px; font-size: 14px;">Comprar Ahora</a>
+            <div class="product-card" style="padding: 20px;">
+                <img src="https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=300&q=80" alt="V-Nrgy" class="product-img" style="height: 140px;">
+                <h4 style="font-size: 16px; margin-top: 10px;">V-Nrgy</h4>
+                <p style="font-size: 13px; color: var(--text-muted); margin: 8px 0;">Complejo multivitamínico avanzado para rendimiento óptimo.</p>
+                <span style="font-size: 15px; font-weight: bold; color: var(--primary-main); margin-bottom: 15px;">S/ 95.00 PEN</span>
+                <a th:href="@{/}" class="btn-catalog" style="text-align: center;">Comprar Ahora</a>
             </div>
         </div>
-        
-        <div style="text-align: center; margin-top: 20px;">
-            <a th:href="@{/}" class="btn-primary">Volver al Inicio</a>
+
+        <div style="margin-top: 40px; text-align: center;">
+            <a th:href="@{/}" class="btn-booking">Volver a la Página Principal</a>
         </div>
     </div>
 
     <footer>
-        <p>&copy; 2026 Aura Wellness & Beauty - El Agustino, Lima.</p>
+        <div class="footer-links">
+            <a href="#">POLÍTICA DE PRIVACIDAD</a>
+            <a href="#">TÉRMINOS Y CONDICIONES</a>
+        </div>
+        <div class="footer-badges">
+            <div class="badge-item">🛡️ VERIFIED DISTRIBUTOR</div>
+        </div>
     </footer>
 
 </body>
