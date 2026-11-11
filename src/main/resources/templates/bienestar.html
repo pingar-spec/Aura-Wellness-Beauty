@@ -1,44 +1,14 @@
 <!DOCTYPE html>
-<html lang="es">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
     <meta charset="UTF-8">
-    <title>Línea Bienestar | Aura Wellness & Beauty</title>
-    <link rel="stylesheet" href="/css/styles.css">
+    <title>Línea Bienestar - Aura Wellness & Beauty</title>
 </head>
 <body>
-    <header class="navbar">
-        <div class="logo">AURA WELLNESS & BEAUTY</div>
-        <nav>
-            <a href="/">Inicio</a>
-            <a href="/bienestar">Línea Bienestar</a>
-            <a href="/estetica">Servicios Estética</a>
-        </nav>
-    </header>
-    <section class="catalog">
-        <h2>Catálogo de Suplementos y Bienestar</h2>
-        <div class="grid-products">
-            <div class="card">
-                <h3>V-ORGANEX</h3>
-                <p>Desintoxicación hepática y biliar[cite: 4].</p>
-                <span class="price">$700 MXN / $56 USD[cite: 4]</span>
-                <a href="https://api.whatsapp.com/send?phone=51999999999&text=Hola,%20deseo%20comprar%20V-ORGANEX" class="btn primary">Pedir por WhatsApp</a>
-            </div>
-            <div class="card">
-                <h3>V-TE DETOX</h3>
-                <p>Favorece la pérdida de peso y limpieza[cite: 6].</p>
-                <span class="price">$350 MXN / $20 USD[cite: 6]</span>
-                <a href="https://api.whatsapp.com/send?phone=51999999999&text=Hola,%20deseo%20comprar%20V-TE%20DETOX" class="btn primary">Pedir por WhatsApp</a>
-            </div>
-            <div class="card">
-                <h3>V-NRGY</h3>
-                <p>Energía natural y rendimiento cognitivo[cite: 49].</p>
-                <span class="price">$800 MXN / $56 USD[cite: 49]</span>
-                <a href="https://api.whatsapp.com/send?phone=51999999999&text=Hola,%20deseo%20comprar%20V-NRGY" class="btn primary">Pedir por WhatsApp</a>
-            </div>
-        </div>
-    </section>
-    <footer class="footer">
-        <p>Aura Wellness & Beauty | Distribuidor Autorizado | Política de Privacidad | Términos y Condiciones</p>
-    </footer>
+    <h1>Línea de Bienestar y Suplementos</h1>
+    <p>Conoce nuestra gama de productos orientados a mejorar tu salud física y nutrición en El Agustino, Lima.</p>
+    <br>
+    <a th:href="@{/}">Volver al Inicio</a>
 </body>
 </html>

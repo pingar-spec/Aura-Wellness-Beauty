@@ -1,38 +1,14 @@
 <!DOCTYPE html>
-<html lang="es">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
     <meta charset="UTF-8">
-    <title>Estética a Domicilio | Aura Wellness & Beauty</title>
-    <link rel="stylesheet" href="/css/styles.css">
+    <title>Servicios de Estética - Aura Wellness & Beauty</title>
 </head>
 <body>
-    <header class="navbar">
-        <div class="logo">AURA WELLNESS & BEAUTY</div>
-        <nav>
-            <a href="/">Inicio</a>
-            <a href="/bienestar">Línea Bienestar</a>
-            <a href="/estetica">Servicios Estética</a>
-        </nav>
-    </header>
-    <section class="booking-section">
-        <h2>Servicios de Estética a Domicilio en El Agustino</h2>
-        <form class="booking-form" action="https://api.whatsapp.com/send" method="get" target="_blank">
-            <input type="hidden" name="phone" value="51999999999">
-            <label>Seleccione Servicio</label>
-            <select name="text" required>
-                <option value="Hola, deseo agendar Manicura a domicilio en El Agustino">Manicura</option>
-                <option value="Hola, deseo agendar Aplicación de Pestañas a domicilio en El Agustino">Pestañas</option>
-                <option value="Hola, deseo agendar Pedicura a domicilio en El Agustino">Pedicura</option>
-            </select>
-            <label>Fecha de Cita</label>
-            <input type="date" required>
-            <label>Dirección exacta en El Agustino</label>
-            <input type="text" placeholder="Calle / Mza / Lote" required>
-            <button type="submit" class="btn primary">Confirmar Cita vía WhatsApp</button>
-        </form>
-    </section>
-    <footer class="footer">
-        <p>Aura Wellness & Beauty | Distribuidor Autorizado | Política de Privacidad | Términos y Condiciones</p>
-    </footer>
+    <h1>Servicios de Estética a Domicilio</h1>
+    <p>Agenda tus tratamientos profesionales de belleza directamente en la comodidad de tu hogar.</p>
+    <br>
+    <a th:href="@{/}">Volver al Inicio</a>
 </body>
 </html>

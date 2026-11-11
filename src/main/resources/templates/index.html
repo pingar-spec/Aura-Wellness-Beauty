@@ -1,31 +1,31 @@
 <!DOCTYPE html>
-<html lang="es">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Aura Wellness & Beauty | Inicio</title>
-    <link rel="stylesheet" href="/css/styles.css">
+    <title>Aura Wellness & Beauty - Plataforma Corporativa</title>
+    <!-- Enlace al CSS separado -->
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-    <header class="navbar">
-        <div class="logo">AURA WELLNESS & BEAUTY</div>
+
+    <header>
+        <div class="logo">Aura Wellness & Beauty</div>
         <nav>
-            <a href="/">Inicio</a>
-            <a href="/bienestar">Línea Bienestar</a>
-            <a href="/estetica">Servicios Estética</a>
+            <a th:href="@{/}">Inicio</a>
+            <a th:href="@{/bienestar}">Línea Bienestar</a>
+            <a th:href="@{/estetica}">Servicios Estética</a>
         </nav>
     </header>
+
     <main class="hero">
-        <div class="hero-content">
-            <h1>Bienestar Integral y Estética Profesional</h1>
-            <p>Delivery y servicios a domicilio en El Agustino y Lima Este.</p>
-            <div class="cta-group">
-                <a href="/bienestar" class="btn primary">Explorar Catálogo de Salud</a>
-                <a href="/estetica" class="btn secondary">Agendar Cita de Belleza</a>
-            </div>
+        <h1>Bienestar Integral y Estética Profesional</h1>
+        <p>Delivery y servicios a domicilio en El Agustino y Lima Este.</p>
+        
+        <div>
+            <a th:href="@{/bienestar}" class="btn">Explorar Catálogo de Salud</a>
+            <a th:href="@{/estetica}" class="btn">Agendar Cita de Belleza</a>
         </div>
     </main>
-    <footer class="footer">
-        <p>Aura Wellness & Beauty | Distribuidor Autorizado | Política de Privacidad | Términos y Condiciones</p>
-    </footer>
+
 </body>
 </html>
