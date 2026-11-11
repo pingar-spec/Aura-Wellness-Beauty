@@ -25,6 +25,8 @@ header {
     font-size: 22px;
     letter-spacing: 1px;
     text-transform: uppercase;
+    color: #fff;
+    text-decoration: none;
 }
 
 nav a {
@@ -58,7 +60,7 @@ nav a:hover {
 }
 
 .hero-content h1 {
-    font-size: 36px;
+    font-size: 34px;
     color: #0b3c3d;
     margin-bottom: 20px;
     line-height: 1.2;
