@@ -8,16 +8,16 @@ public class WebController {
 
     @GetMapping("/")
     public String home() {
-        return "index"; // Renderiza la página principal (index.html)
+        return "index"; // Carga index.html
     }
 
-    @GetMapping("/catalogo")
-    public String catalogo() {
-        return "catalogo"; // Renderiza la vista del catálogo de salud
+    @GetMapping("/bienestar")
+    public String bienestar() {
+        return "bienestar"; // Carga bienestar.html
     }
 
-    @GetMapping("/servicios")
-    public String servicios() {
-        return "servicios"; // Renderiza la vista de los servicios de estética
+    @GetMapping("/estetica")
+    public String estetica() {
+        return "estetica"; // Carga estetica.html
     }
 }
