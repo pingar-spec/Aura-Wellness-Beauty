@@ -4,38 +4,93 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Aura Wellness & Beauty | Black Diamonds & Vital Health</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <style>
 :root{--primary-dark:#072b2c;--primary-main:#0b3c3d;--accent-gold:#c5a059;--bg-light:#f8fafc;--text-dark:#1e293b;--text-muted:#64748b;--white:#fff;--shadow:0 10px 25px -5px rgba(0,0,0,.08)}
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;scroll-behavior:smooth}
 body{background:var(--bg-light);color:var(--text-dark);line-height:1.6}
 header{background:var(--primary-dark);color:white;padding:15px 5%;display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid var(--accent-gold);position:sticky;top:0;z-index:1000}
-.logo-area{display:flex;align-items:center;gap:12px}.logo-badge{background:var(--accent-gold);color:var(--primary-dark);font-weight:800;padding:8px 12px;border-radius:6px}.logo-text{font-size:17px;font-weight:700;text-transform:uppercase;color:white;text-decoration:none;cursor:pointer}
-nav{display:flex;gap:6px;flex-wrap:wrap}nav a{color:white;text-decoration:none;font-weight:600;font-size:13px;padding:8px 12px;border-radius:6px;cursor:pointer}nav a:hover,nav a.active{background:var(--accent-gold);color:var(--primary-dark)}
-.tab-section{display:none;max-width:1300px;margin:40px auto;padding:0 20px;min-height:60vh}.tab-section.active-tab{display:block}
-.section-header{text-align:center;margin-bottom:30px}.section-header h2{font-size:26px;color:var(--primary-main);text-transform:uppercase;margin-bottom:8px}.section-header p{color:var(--text-muted);font-size:14px}
-.categorias-bar{display:flex;justify-content:center;gap:10px;margin-bottom:30px;flex-wrap:wrap}.cat-btn{background:white;border:1px solid #cbd5e1;padding:8px 16px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;color:var(--text-dark)}.cat-btn:hover,.cat-btn.active-cat{background:var(--primary-main);color:white;border-color:var(--primary-main)}
+.logo-area{display:flex;align-items:center;gap:12px}
+.logo-badge{background:var(--accent-gold);color:var(--primary-dark);font-weight:800;padding:8px 12px;border-radius:6px}
+.logo-text{font-size:17px;font-weight:700;text-transform:uppercase;color:white;text-decoration:none;cursor:pointer}
+nav{display:flex;gap:6px;flex-wrap:wrap}
+nav a{color:white;text-decoration:none;font-weight:600;font-size:13px;padding:8px 12px;border-radius:6px;cursor:pointer}
+nav a:hover,nav a.active{background:var(--accent-gold);color:var(--primary-dark)}
+.tab-section{display:none;max-width:1300px;margin:40px auto;padding:0 20px;min-height:60vh}
+.tab-section.active-tab{display:block}
+.section-header{text-align:center;margin-bottom:30px}
+.section-header h2{font-size:26px;color:var(--primary-main);text-transform:uppercase;margin-bottom:8px}
+.section-header p{color:var(--text-muted);font-size:14px}
+.categorias-bar{display:flex;justify-content:center;gap:10px;margin-bottom:30px;flex-wrap:wrap}
+.cat-btn{background:white;border:1px solid #cbd5e1;padding:8px 16px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;color:var(--text-dark)}
+.cat-btn:hover,.cat-btn.active-cat{background:var(--primary-main);color:white;border-color:var(--primary-main)}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:25px}
 .card{background:white;border-radius:12px;padding:20px;box-shadow:var(--shadow);border:1px solid #e2e8f0;display:flex;flex-direction:column;justify-content:space-between;min-width:0}
-.card-img-container{width:100%;height:260px;background:#f1f5f9;border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:15px;overflow:hidden}.card-img-container img{height:100%;width:100%;object-fit:contain}
-.card h3{color:var(--primary-main);font-size:19px;margin-bottom:4px;text-transform:uppercase}.subtitle{font-size:11px;color:var(--accent-gold);font-weight:700;text-transform:uppercase;margin-bottom:12px}
-.info-block{font-size:12px;color:var(--text-muted);margin-bottom:10px;background:#f8fafc;padding:8px;border-radius:6px;border-left:3px solid var(--accent-gold)}.info-block strong{color:var(--text-dark)}
-.card-footer{display:flex;justify-content:space-between;align-items:center;gap:10px;border-top:1px solid #f1f5f9;padding-top:12px;margin-top:auto}.price{font-size:17px;font-weight:800;color:var(--primary-main)}
-.btn{background:var(--primary-main);color:white;padding:9px 16px;border-radius:6px;font-weight:700;font-size:11px;text-transform:uppercase;border:none;cursor:pointer;transition:.2s}.btn:hover{background:var(--accent-gold);color:var(--primary-dark)}
-.service-card .card-img-container{height:230px}.service-card .card-img-container img{object-fit:cover}.service-includes{font-size:13px;color:var(--text-muted);padding:8px 0 14px}.service-price{font-size:21px;font-weight:800;color:var(--primary-main)}
-.booking-container,.cart-container{background:white;border-radius:14px;padding:30px;box-shadow:var(--shadow);max-width:800px;margin:30px auto;border:1px solid #e2e8f0}.booking-container h3,.cart-container h3{color:var(--primary-main);margin-bottom:18px;text-transform:uppercase;font-size:18px}
-.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}.form-group.full-width{grid-column:span 2}.form-group label{display:block;font-size:11px;font-weight:700;margin-bottom:5px;color:var(--primary-main);text-transform:uppercase}.form-group input,.form-group select{width:100%;padding:10px;border:1px solid #cbd5e1;border-radius:6px;font-size:13px}
+.card-img-container{width:100%;height:260px;background:#f1f5f9;border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:15px;overflow:hidden}
+.card-img-container img{height:100%;width:100%;object-fit:contain}
+.card h3{color:var(--primary-main);font-size:19px;margin-bottom:4px;text-transform:uppercase}
+.subtitle{font-size:11px;color:var(--accent-gold);font-weight:700;text-transform:uppercase;margin-bottom:12px}
+.info-block{font-size:12px;color:var(--text-muted);margin-bottom:10px;background:#f8fafc;padding:8px;border-radius:6px;border-left:3px solid var(--accent-gold)}
+.info-block strong{color:var(--text-dark)}
+.card-footer{display:flex;justify-content:space-between;align-items:center;gap:10px;border-top:1px solid #f1f5f9;padding-top:12px;margin-top:auto}
+.price{font-size:17px;font-weight:800;color:var(--primary-main)}
+.btn{background:var(--primary-main);color:white;padding:9px 16px;border-radius:6px;font-weight:700;font-size:11px;text-transform:uppercase;border:none;cursor:pointer;transition:.2s}
+.btn:hover{background:var(--accent-gold);color:var(--primary-dark)}
+.btn:disabled{opacity:.6;cursor:not-allowed}
+.service-card .card-img-container{height:230px}
+.service-card .card-img-container img{object-fit:cover}
+.service-includes{font-size:13px;color:var(--text-muted);padding:8px 0 14px}
+.service-price{font-size:21px;font-weight:800;color:var(--primary-main)}
+.booking-container,.cart-container{background:white;border-radius:14px;padding:30px;box-shadow:var(--shadow);max-width:800px;margin:30px auto;border:1px solid #e2e8f0}
+.booking-container h3,.cart-container h3{color:var(--primary-main);margin-bottom:18px;text-transform:uppercase;font-size:18px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.form-group.full-width{grid-column:span 2}
+.form-group label{display:block;font-size:11px;font-weight:700;margin-bottom:5px;color:var(--primary-main);text-transform:uppercase}
+.form-group input,.form-group select{width:100%;padding:10px;border:1px solid #cbd5e1;border-radius:6px;font-size:13px}
 .booking-note{background:#f8fafc;border-left:4px solid var(--accent-gold);padding:12px;margin:16px 0;color:var(--text-muted);font-size:13px}
-.admin-drop-zone{width:100%;height:180px;background:#f8fafc;border:2px dashed var(--accent-gold);border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;margin-bottom:12px;overflow:hidden}.admin-drop-zone img{max-height:125px;max-width:95%;object-fit:contain;margin-bottom:5px}.drop-hint{font-size:10px;color:var(--primary-main);font-weight:700;text-transform:uppercase;background:#fff;padding:3px 6px;border-radius:4px}
-.admin-controls{background:#f8fafc;padding:12px;border-radius:8px;margin-bottom:12px;border:1px solid #cbd5e1}.admin-controls label{font-size:11px;font-weight:700;color:var(--primary-main);display:block;margin-bottom:3px;text-transform:uppercase}.admin-controls input{width:100%;padding:8px;border:1px solid #cbd5e1;border-radius:6px;font-size:13px;margin-bottom:8px;font-weight:bold}
-.login-box{max-width:380px;margin:60px auto;background:white;padding:35px;border-radius:14px;box-shadow:var(--shadow);border:2px solid var(--accent-gold);text-align:center}.login-box h3{color:var(--primary-main);margin-bottom:15px}.login-box input{width:100%;padding:10px;border:1px solid #cbd5e1;border-radius:6px;margin-bottom:12px;text-align:center}
-.cart-item{display:grid;grid-template-columns:70px 1fr auto;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid #e2e8f0;font-size:13px}.cart-item img{width:70px;height:70px;object-fit:contain;background:#f8fafc;border-radius:7px}.cart-item-info strong{display:block;color:var(--primary-main)}.cart-actions{display:flex;align-items:center;gap:6px;margin-top:5px}.cart-actions button{border:1px solid #cbd5e1;background:white;border-radius:4px;padding:2px 8px;cursor:pointer}.cart-total{font-size:22px;font-weight:800;color:var(--primary-main);margin:20px 0;text-align:right}
-footer{background:var(--primary-dark);color:white;padding:40px 5% 20px;font-size:13px;border-top:3px solid var(--accent-gold);margin-top:60px}.footer-content{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:30px;margin-bottom:30px}.footer-col h4{color:var(--accent-gold);margin-bottom:12px}.footer-col p{color:#cbd5e1;font-size:12px;margin-bottom:8px}.footer-bottom{text-align:center;border-top:1px solid #ffffff1a;padding-top:20px;font-size:12px;color:#94a3b8}.admin-link{color:#94a3b8;text-decoration:none;cursor:pointer}
-@media(max-width:700px){header{align-items:flex-start;gap:12px;flex-direction:column}nav{width:100%}nav a{font-size:11px;padding:7px}.grid{grid-template-columns:1fr}.form-grid{grid-template-columns:1fr}.form-group.full-width{grid-column:span 1}.booking-container,.cart-container{padding:18px}.cart-item{grid-template-columns:58px 1fr}.cart-item>div:last-child{grid-column:2}.cart-item img{width:58px;height:58px}}
+.admin-drop-zone{width:100%;height:180px;background:#f8fafc;border:2px dashed var(--accent-gold);border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;margin-bottom:12px;overflow:hidden}
+.admin-drop-zone img{max-height:125px;max-width:95%;object-fit:contain;margin-bottom:5px}
+.drop-hint{font-size:10px;color:var(--primary-main);font-weight:700;text-transform:uppercase;background:#fff;padding:3px 6px;border-radius:4px}
+.admin-controls{background:#f8fafc;padding:12px;border-radius:8px;margin-bottom:12px;border:1px solid #cbd5e1}
+.admin-controls label{font-size:11px;font-weight:700;color:var(--primary-main);display:block;margin-bottom:3px;text-transform:uppercase}
+.admin-controls input{width:100%;padding:8px;border:1px solid #cbd5e1;border-radius:6px;font-size:13px;margin-bottom:8px;font-weight:bold}
+.login-box{max-width:380px;margin:60px auto;background:white;padding:35px;border-radius:14px;box-shadow:var(--shadow);border:2px solid var(--accent-gold);text-align:center}
+.login-box h3{color:var(--primary-main);margin-bottom:15px}
+.login-box input{width:100%;padding:10px;border:1px solid #cbd5e1;border-radius:6px;margin-bottom:12px;text-align:center}
+.cart-item{display:grid;grid-template-columns:70px 1fr auto;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid #e2e8f0;font-size:13px}
+.cart-item img{width:70px;height:70px;object-fit:contain;background:#f8fafc;border-radius:7px}
+.cart-item-info strong{display:block;color:var(--primary-main)}
+.cart-actions{display:flex;align-items:center;gap:6px;margin-top:5px}
+.cart-actions button{border:1px solid #cbd5e1;background:white;border-radius:4px;padding:2px 8px;cursor:pointer}
+.cart-total{font-size:22px;font-weight:800;color:var(--primary-main);margin:20px 0;text-align:right}
+footer{background:var(--primary-dark);color:white;padding:40px 5% 20px;font-size:13px;border-top:3px solid var(--accent-gold);margin-top:60px}
+.footer-content{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:30px;margin-bottom:30px}
+.footer-col h4{color:var(--accent-gold);margin-bottom:12px}
+.footer-col p{color:#cbd5e1;font-size:12px;margin-bottom:8px}
+.footer-bottom{text-align:center;border-top:1px solid #ffffff1a;padding-top:20px;font-size:12px;color:#94a3b8}
+.admin-link{color:#94a3b8;text-decoration:none;cursor:pointer}
+@media(max-width:700px){
+ header{align-items:flex-start;gap:12px;flex-direction:column}
+ nav{width:100%}
+ nav a{font-size:11px;padding:7px}
+ .grid{grid-template-columns:1fr}
+ .form-grid{grid-template-columns:1fr}
+ .form-group.full-width{grid-column:span 1}
+ .booking-container,.cart-container{padding:18px}
+ .cart-item{grid-template-columns:58px 1fr}
+ .cart-item>div:last-child{grid-column:2}
+ .cart-item img{width:58px;height:58px}
+}
 </style>
 </head>
+
 <body>
 <header>
- <div class="logo-area"><div class="logo-badge">BD</div><a class="logo-text" onclick="cambiarVista('suplementos')">Aura Wellness & Beauty</a></div>
+ <div class="logo-area">
+  <div class="logo-badge">BD</div>
+  <a class="logo-text" onclick="cambiarVista('suplementos')">Aura Wellness & Beauty</a>
+ </div>
  <nav>
   <a id="nav-suplementos" class="active" onclick="cambiarVista('suplementos')">Catálogo Suplementos</a>
   <a id="nav-estetica" onclick="cambiarVista('estetica')">Servicios a Domicilio</a>
@@ -44,7 +99,10 @@ footer{background:var(--primary-dark);color:white;padding:40px 5% 20px;font-size
 </header>
 
 <div id="vista-suplementos" class="tab-section active-tab">
- <div class="section-header"><h2>Módulo de Salud y Bienestar (Vital Health)</h2><p>Selección de suplementos para el bienestar.</p></div>
+ <div class="section-header">
+  <h2>Módulo de Salud y Bienestar (Vital Health)</h2>
+  <p>Selección de suplementos para el bienestar.</p>
+ </div>
  <div class="categorias-bar">
   <button class="cat-btn active-cat" onclick="filtrarCategoria('todos',this)">Todos</button>
   <button class="cat-btn" onclick="filtrarCategoria('Control de Peso',this)">Control de Peso</button>
@@ -59,41 +117,74 @@ footer{background:var(--primary-dark);color:white;padding:40px 5% 20px;font-size
 </div>
 
 <div id="vista-estetica" class="tab-section">
- <div class="section-header"><h2>Estética y Servicios a Domicilio</h2><p>Atención a domicilio en El Agustino y zonas aledañas.</p></div>
+ <div class="section-header">
+  <h2>Estética y Servicios a Domicilio</h2>
+  <p>Atención a domicilio en El Agustino y zonas aledañas.</p>
+ </div>
  <div class="grid" id="grid-servicios"></div>
  <div class="booking-container">
   <h3>Solicitar servicio de estética</h3>
   <div class="form-grid">
-   <div class="form-group full-width"><label>Servicio seleccionado</label><select id="booking-servicio"></select></div>
-   <div class="form-group"><label>Zona de cobertura</label><select id="booking-zona">
-    <option>El Agustino (Centro/Zona Principal)</option><option>El Agustino (Aledaños/Riva Agüero)</option><option>Zonas Limítrofes Cercanas</option>
-   </select></div>
-   <div class="form-group"><label>Nombre del cliente</label><input id="booking-nombre" type="text" placeholder="Nombre y apellido" maxlength="80"></div>
-   <div class="form-group"><label>Teléfono de contacto</label><input id="booking-telefono" type="tel" placeholder="Ej. 987654321" maxlength="15"></div>
-   <div class="form-group full-width"><label>Dirección exacta</label><input id="booking-direccion" type="text" placeholder="Calle, avenida, número, urbanización" maxlength="180"></div>
-   <div class="form-group full-width"><label>Referencia del domicilio</label><input id="booking-referencia" type="text" placeholder="Punto de referencia para llegar (opcional)" maxlength="180"></div>
+   <div class="form-group full-width">
+    <label>Servicio seleccionado</label>
+    <select id="booking-servicio"></select>
+   </div>
+   <div class="form-group">
+    <label>Zona de cobertura</label>
+    <select id="booking-zona">
+     <option>El Agustino (Centro/Zona Principal)</option>
+     <option>El Agustino (Aledaños/Riva Agüero)</option>
+     <option>Zonas Limítrofes Cercanas</option>
+    </select>
+   </div>
+   <div class="form-group">
+    <label>Nombre del cliente</label>
+    <input id="booking-nombre" type="text" placeholder="Nombre y apellido" maxlength="80">
+   </div>
+   <div class="form-group">
+    <label>Teléfono de contacto</label>
+    <input id="booking-telefono" type="tel" placeholder="Ej. 987654321" maxlength="15">
+   </div>
+   <div class="form-group full-width">
+    <label>Dirección exacta</label>
+    <input id="booking-direccion" type="text" placeholder="Calle, avenida, número, urbanización" maxlength="180">
+   </div>
+   <div class="form-group full-width">
+    <label>Referencia del domicilio</label>
+    <input id="booking-referencia" type="text" placeholder="Punto de referencia para llegar (opcional)" maxlength="180">
+   </div>
   </div>
   <div class="booking-note">La fecha y hora quedan pendientes de coordinación. La solicitud será confirmada después de verificar la disponibilidad del servicio.</div>
   <button class="btn" style="width:100%;padding:14px;font-size:13px" onclick="agendarServicioWhatsApp()">Enviar solicitud por WhatsApp 📲</button>
  </div>
 </div>
 
-<div id="vista-login" class="tab-section"><div class="login-box">
- <h3>🔐 Acceso privado administrador</h3><p style="color:var(--text-muted);font-size:13px;margin-bottom:20px">Introduce tu contraseña.</p>
- <input type="password" id="admin-pass" placeholder="Contraseña"><button class="btn" style="width:100%;padding:11px" onclick="verificarAdmin()">Ingresar al panel</button>
- <p style="margin-top:12px;font-size:12px;color:#ef4444;display:none" id="error-login">Contraseña incorrecta.</p>
-</div></div>
+<div id="vista-login" class="tab-section">
+ <div class="login-box">
+  <h3>🔐 Acceso privado administrador</h3>
+  <p style="color:var(--text-muted);font-size:13px;margin-bottom:20px">Introduce tu correo y contraseña de administrador.</p>
+  <input type="email" id="admin-email" placeholder="Correo del administrador" autocomplete="username">
+  <input type="password" id="admin-pass" placeholder="Contraseña" autocomplete="current-password">
+  <button class="btn" style="width:100%;padding:11px" onclick="verificarAdmin()">Ingresar al panel</button>
+  <p style="margin-top:12px;font-size:12px;color:#ef4444;display:none" id="error-login"></p>
+ </div>
+</div>
 
 <div id="vista-admin" class="tab-section">
  <div class="section-header" style="display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap">
-  <div><h2>Panel de administración</h2><p>Actualiza precios y fotografías de productos y servicios.</p></div>
+  <div>
+   <h2>Panel de administración</h2>
+   <p>Actualiza precios y fotografías de productos y servicios.</p>
+  </div>
   <button class="btn" style="background:#b91c1c" onclick="cerrarSesionAdmin()">Cerrar sesión 🔒</button>
  </div>
  <h3 style="color:var(--primary-main);margin:20px 0">Catálogo de suplementos</h3>
  <div class="grid" id="grid-admin"></div>
  <h3 style="color:var(--primary-main);margin:40px 0 20px">Imágenes de servicios de estética</h3>
  <div class="grid" id="grid-admin-servicios"></div>
- <div style="text-align:center;margin-top:40px"><button class="btn" style="padding:15px 40px;font-size:14px;background:var(--accent-gold);color:var(--primary-dark)" onclick="guardarYVolver()">💾 Guardar cambios y ver tienda</button></div>
+ <div style="text-align:center;margin-top:40px">
+  <button class="btn" style="padding:15px 40px;font-size:14px;background:var(--accent-gold);color:var(--primary-dark)" onclick="guardarYVolver()">💾 Guardar cambios y ver tienda</button>
+ </div>
 </div>
 
 <div id="vista-carrito" class="tab-section">
@@ -104,25 +195,52 @@ footer{background:var(--primary-dark);color:white;padding:40px 5% 20px;font-size
   <div style="margin-top:25px;border-top:2px solid #e2e8f0;padding-top:20px">
    <h3>Datos de envío a domicilio</h3>
    <div class="form-grid">
-    <div class="form-group full-width"><label>Nombre</label><input id="cliente-nombre" type="text" placeholder="Nombre y apellido"></div>
-    <div class="form-group full-width"><label>Dirección</label><input id="cliente-direccion" type="text" placeholder="Dirección de entrega"></div>
-    <div class="form-group full-width"><label>Teléfono</label><input id="cliente-telefono" type="tel" placeholder="Ej. 987654321"></div>
+    <div class="form-group full-width">
+     <label>Nombre</label>
+     <input id="cliente-nombre" type="text" placeholder="Nombre y apellido">
+    </div>
+    <div class="form-group full-width">
+     <label>Dirección</label>
+     <input id="cliente-direccion" type="text" placeholder="Dirección de entrega">
+    </div>
+    <div class="form-group full-width">
+     <label>Teléfono</label>
+     <input id="cliente-telefono" type="tel" placeholder="Ej. 987654321">
+    </div>
    </div>
    <button onclick="enviarWhatsApp()" class="btn" style="width:100%;margin-top:20px;padding:15px;font-size:13px">Enviar pedido por WhatsApp (+51 940 815 597) 📲</button>
   </div>
  </div>
 </div>
 
-<footer><div class="footer-content">
- <div class="footer-col"><h4>Aura Wellness & Beauty</h4><p>Plataforma de productos de bienestar y servicios de estética a domicilio en El Agustino, Lima.</p></div>
- <div class="footer-col"><h4>Aviso legal</h4><p><strong>Ley N.° 29733:</strong> Los datos personales proporcionados deben tratarse de forma confidencial y conforme a la normativa aplicable.</p><p><strong>Información de productos:</strong> Los suplementos no sustituyen tratamientos ni indicaciones médicas. Consulta con un profesional de salud antes de consumirlos.</p></div>
- </div><div class="footer-bottom"><p>&copy; 2026 Aura Wellness & Beauty. Todos los derechos reservados. | <a class="admin-link" onclick="irAlLogin()">⚙️ Panel Admin Privado</a></p></div>
+<footer>
+ <div class="footer-content">
+  <div class="footer-col">
+   <h4>Aura Wellness & Beauty</h4>
+   <p>Plataforma de productos de bienestar y servicios de estética a domicilio en El Agustino, Lima.</p>
+  </div>
+  <div class="footer-col">
+   <h4>Aviso legal</h4>
+   <p><strong>Ley N.° 29733:</strong> Los datos personales proporcionados deben tratarse de forma confidencial y conforme a la normativa aplicable.</p>
+   <p><strong>Información de productos:</strong> Los suplementos no sustituyen tratamientos ni indicaciones médicas. Consulta con un profesional de salud antes de consumirlos.</p>
+  </div>
+ </div>
+ <div class="footer-bottom">
+  <p>&copy; 2026 Aura Wellness & Beauty. Todos los derechos reservados. | <a class="admin-link" onclick="irAlLogin()">⚙️ Panel Admin Privado</a></p>
+ </div>
 </footer>
 
 <script>
+/* CONFIGURACIÓN SUPABASE */
+const SUPABASE_URL='https://muhmfhetyjhwrjsumnbw.supabase.co';
+const SUPABASE_KEY='sb_publishable_T4JvN4TlUFmTqNaBcVKc5Q_IMDA7m-X';
+const supabaseClient=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+
 const COMISION=0.20;
 const WHATSAPP="51940815597";
+const ADMIN_EMAIL="pingar@ucvvirtual.edu.pe";
 const BASE_GITHUB="https://raw.githubusercontent.com/pingar-spec/Aura-Wellness-Beauty/main/images_recuperadas/";
+
 const productosPorDefecto=[
 ['v-te-detox','V-Te Detox','Control de Peso','Infusión Herbal Purificante','Favorece el bienestar general y acompaña hábitos saludables.','Hoja de Caqui, Hoja de Malva, Nopal, Jengibre, Cardo bendito, Manzanilla, Malvavisco.',350,'V-Te Detox.jpg'],
 ['v-organex','V-Organex','Cuidado Hepático/Renal','Desintoxicación Hepática','Producto de bienestar para complementar una alimentación equilibrada.','Boldo, Cardo mariano, Casia amara, Hierba del Sapo, Guaraná, Achicoria, Alcachofa.',700,'V-Organex.jpg'],
@@ -159,143 +277,777 @@ const productosPorDefecto=[
 ['d-fence','D Fence (Einstein Kids)','Línea Infantil Einstein Kids','Protección Neuronal e Inmune Infantil','Producto de la línea infantil. Verificar indicaciones y edad recomendada del fabricante.','Inulina de agave, Limón, Vitamina C, Treonato de magnesio, Cúrcuma, Zinc, Vitamina D3.',800,'D Fence (Einstein Kids).jpg'],
 ['smartbiotics','Smartbiotics (Einstein Kids)','Línea Infantil Einstein Kids','Probióticos Infantiles','Producto de la línea infantil. Verificar indicaciones y edad recomendada del fabricante.','Lactobacillus acidophilus, Rhamnosus GG, Bifidobacterium lactis, Inulina de agave.',800,'Smartbiotics (Einstein Kids).jpg'],
 ['kit-detox-integral','Kit Detox & Bienestar Total','Kits Completos','Pack Dual Depurativo','Incluye dos productos para complementar la rutina de bienestar.','Incluye V-Te Detox + V-Organex originales.',1000,'']
-].map(x=>({id:x[0],nombre:x[1],categoria:x[2],subtitulo:x[3],beneficios:x[4],ingredientes:x[5],precioBase:x[6],archivo:x[7]}));
+].map(x=>({
+ id:x[0],nombre:x[1],categoria:x[2],subtitulo:x[3],
+ beneficios:x[4],ingredientes:x[5],precioBase:x[6],archivo:x[7]
+}));
 
-const imagenesGitHub=Object.fromEntries(productosPorDefecto.filter(p=>p.archivo).map(p=>[p.id,BASE_GITHUB+encodeURIComponent(p.archivo)]));
-let productos=(()=>{
- try{
-  const raw=localStorage.getItem('aura_productos');
-  if(raw){const saved=JSON.parse(raw);if(Array.isArray(saved)){
-   return productosPorDefecto.map(def=>{
-    const old=saved.find(p=>p.id===def.id);
-    if(!old)return {...def,imagen:imagenesGitHub[def.id]||''};
-    // Mantiene la imagen personalizada guardada; solo sustituye las antiguas rutas locales img/.
-    const oldImage=old.imagen||'';
-    const imagen=(!oldImage||oldImage.startsWith('img/'))?(imagenesGitHub[def.id]||''):oldImage;
-    return {...def,...old,imagen};
-   });
-  }}
- }catch(e){console.warn('No se pudieron leer los productos guardados',e)}
- return productosPorDefecto.map(p=>({...p,imagen:imagenesGitHub[p.id]||''}));
-})();
+const imagenesGitHub=Object.fromEntries(
+ productosPorDefecto.filter(p=>p.archivo).map(p=>[
+  p.id,BASE_GITHUB+encodeURIComponent(p.archivo)
+ ])
+);
+
 const serviciosPorDefecto=[
- {id:'manicure',nombre:'Manicure y uñas a domicilio',descripcion:'Cuidado y embellecimiento de uñas de manos, con acabado prolijo y atención en la comodidad de tu hogar.',incluye:'Limpieza, limado, preparación de uñas y esmaltado básico.',precio:50,imagen:'https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&w=900&q=85'},
- {id:'pestanas',nombre:'Pestañas profesionales a domicilio',descripcion:'Servicio de belleza para realzar la mirada con una atención personalizada.',incluye:'Preparación del área, aplicación del servicio elegido y recomendaciones de cuidado.',precio:70,imagen:'https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=900&q=85'},
- {id:'pedicura',nombre:'Pedicura especializada a domicilio',descripcion:'Cuidado estético de los pies y uñas, realizado con atención y comodidad en casa.',incluye:'Limpieza, limado, cuidado de uñas y acabado estético.',precio:60,imagen:'https://images.unsplash.com/photo-1519014816548-bf5fe059798b?auto=format&fit=crop&w=900&q=85'},
- {id:'kit-estetica',nombre:'Kit completo: manicure + pestañas',descripcion:'Una opción que reúne dos servicios de belleza en una sola visita a domicilio.',incluye:'Servicio de manicure y servicio profesional de pestañas.',precio:110,imagen:'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=900&q=85'}
+{id:'manicure',nombre:'Manicure y uñas a domicilio',descripcion:'Cuidado y embellecimiento de uñas de manos, con acabado prolijo y atención en la comodidad de tu hogar.',incluye:'Limpieza, limado, preparación de uñas y esmaltado básico.',precio:50,imagen:'https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&w=900&q=85'},
+{id:'pestanas',nombre:'Pestañas profesionales a domicilio',descripcion:'Servicio de belleza para realzar la mirada con una atención personalizada.',incluye:'Preparación del área, aplicación del servicio elegido y recomendaciones de cuidado.',precio:70,imagen:'https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=900&q=85'},
+{id:'pedicura',nombre:'Pedicura especializada a domicilio',descripcion:'Cuidado estético de los pies y uñas, realizado con atención y comodidad en casa.',incluye:'Limpieza, limado, cuidado de uñas y acabado estético.',precio:60,imagen:'https://images.unsplash.com/photo-1519014816548-bf5fe059798b?auto=format&fit=crop&w=900&q=85'},
+{id:'kit-estetica',nombre:'Kit completo: manicure + pestañas',descripcion:'Una opción que reúne dos servicios de belleza en una sola visita a domicilio.',incluye:'Servicio de manicure y servicio profesional de pestañas.',precio:110,imagen:'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=900&q=85'}
 ];
-let servicios=(()=>{
- try{const raw=localStorage.getItem('aura_servicios');if(raw){const a=JSON.parse(raw);if(Array.isArray(a))return serviciosPorDefecto.map(d=>({...d,...(a.find(x=>x.id===d.id)||{})}));}}
- catch(e){console.warn(e)}
- return serviciosPorDefecto.map(x=>({...x}));
-})();
+
+function leerLocal(clave,defecto){
+ try{
+  const d=JSON.parse(localStorage.getItem(clave));
+  return Array.isArray(d)?d:defecto;
+ }catch{
+  return defecto;
+ }
+}
+
+const productosLocales=leerLocal('aura_productos',[]);
+const serviciosLocales=leerLocal('aura_servicios',[]);
+
+let productos=productosPorDefecto.map(def=>{
+ const old=productosLocales.find(p=>p.id===def.id);
+ const imagen=old?.imagen&&!old.imagen.startsWith('img/')
+  ?old.imagen:(imagenesGitHub[def.id]||'');
+ return {...def,...(old||{}),imagen};
+});
+
+let servicios=serviciosPorDefecto.map(def=>{
+ const old=serviciosLocales.find(s=>s.id===def.id);
+ return {...def,...(old||{})};
+});
+
 let categoriaActual='todos';
 let carrito=[];
+let supabaseDisponible=false;
+
 function cambiarVista(vista){
  document.querySelectorAll('.tab-section').forEach(s=>s.classList.remove('active-tab'));
  document.querySelectorAll('nav a').forEach(a=>a.classList.remove('active'));
- const target=document.getElementById('vista-'+vista);if(target)target.classList.add('active-tab');
- const nav=document.getElementById('nav-'+vista);if(nav)nav.classList.add('active');
+
+ const target=document.getElementById('vista-'+vista);
+ if(target)target.classList.add('active-tab');
+
+ const nav=document.getElementById('nav-'+vista);
+ if(nav)nav.classList.add('active');
+
  window.scrollTo({top:0,behavior:'smooth'});
 }
-function filtrarCategoria(cat,btn){categoriaActual=cat;document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('active-cat'));btn.classList.add('active-cat');renderizarCliente()}
-function irAlLogin(){document.getElementById('admin-pass').value='';document.getElementById('error-login').style.display='none';cambiarVista('login')}
-function verificarAdmin(){if(document.getElementById('admin-pass').value==='admin123'){renderizarAdmin();cambiarVista('admin')}else document.getElementById('error-login').style.display='block'}
-function cerrarSesionAdmin(){document.getElementById('admin-pass').value='';cambiarVista('suplementos')}
-function renderizarCliente(){
- const grid=document.getElementById('grid-suplementos');grid.innerHTML='';
- const lista=categoriaActual==='todos'?productos:productos.filter(p=>p.categoria===categoriaActual);
- if(!lista.length){grid.innerHTML='<p>No hay productos en esta categoría.</p>';return}
- lista.forEach(p=>{
-  const precio=p.precioBase*(1+COMISION);
-  grid.insertAdjacentHTML('beforeend',`<article class="card"><div><div class="card-img-container"><img src="${escapeAttr(p.imagen||'')}" alt="${escapeAttr(p.nombre)}" onerror="this.style.display='none'"></div><h3>${escapeHTML(p.nombre)}</h3><div class="subtitle">${escapeHTML(p.subtitulo)}</div><div class="info-block"><strong>Información:</strong> ${escapeHTML(p.beneficios)}</div><div class="info-block"><strong>Ingredientes:</strong> ${escapeHTML(p.ingredientes)}</div></div><div class="card-footer"><div class="price">S/ ${precio.toFixed(2)}</div><button class="btn" onclick="agregarAlCarrito('${p.id}')">Agregar</button></div></article>`);
- });
+
+function filtrarCategoria(cat,btn){
+ categoriaActual=cat;
+ document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('active-cat'));
+ btn.classList.add('active-cat');
+ renderizarCliente();
 }
-function renderizarServicios(){
- const grid=document.getElementById('grid-servicios'),select=document.getElementById('booking-servicio');grid.innerHTML='';select.innerHTML='';
- servicios.forEach(s=>{
-  grid.insertAdjacentHTML('beforeend',`<article class="card service-card"><div><div class="card-img-container"><img src="${escapeAttr(s.imagen)}" alt="Fotografía referencial de ${escapeAttr(s.nombre)}" onerror="this.src='https://placehold.co/800x500/f1f5f9/0b3c3d?text=Aura+Wellness+%26+Beauty'"></div><h3>${escapeHTML(s.nombre)}</h3><p style="font-size:13px;color:var(--text-muted)">${escapeHTML(s.descripcion)}</p><div class="service-includes"><strong>Incluye:</strong> ${escapeHTML(s.incluye)}</div></div><div class="card-footer"><span class="service-price">S/ ${Number(s.precio).toFixed(2)}</span><button class="btn" onclick="seleccionarServicio('${s.id}')">Solicitar</button></div></article>`);
-  select.add(new Option(`${s.nombre} - S/ ${Number(s.precio).toFixed(2)}`,s.id));
- });
+
+function irAlLogin(){
+ document.getElementById('admin-email').value='';
+ document.getElementById('admin-pass').value='';
+ document.getElementById('error-login').style.display='none';
+ cambiarVista('login');
 }
-function seleccionarServicio(id){document.getElementById('booking-servicio').value=id;document.querySelector('.booking-container').scrollIntoView({behavior:'smooth',block:'center'})}
-function renderizarAdmin(){
- const grid=document.getElementById('grid-admin');grid.innerHTML='';
- productos.forEach((p,i)=>{
-  grid.insertAdjacentHTML('beforeend',`<article class="card"><label style="font-size:11px;font-weight:700;color:var(--primary-main);margin-bottom:6px">📸 Imagen del producto</label><div class="admin-drop-zone" onclick="document.getElementById('prod-file-${i}').click()" ondragover="event.preventDefault()" ondrop="manejarDropProducto(event,${i})"><img id="prod-preview-${i}" src="${escapeAttr(p.imagen||'')}" alt=""><div class="drop-hint">Subir o cambiar imagen</div></div><input type="file" id="prod-file-${i}" accept="image/*" hidden onchange="manejarInputProducto(this,${i})"><div class="admin-controls"><label>Precio base (S/)</label><input type="number" min="0" step="0.01" id="admin-precio-${i}" value="${Number(p.precioBase)}"><label>Precio al público (+20%): S/ <span id="admin-calc-${i}">${(p.precioBase*1.2).toFixed(2)}</span></label></div><h3>${escapeHTML(p.nombre)}</h3><div class="subtitle">${escapeHTML(p.categoria)}</div></article>`);
-  document.getElementById(`admin-precio-${i}`).addEventListener('input',()=>actualizarPreviewAdmin(i));
- });
- const gs=document.getElementById('grid-admin-servicios');gs.innerHTML='';
- servicios.forEach((s,i)=>{
-  gs.insertAdjacentHTML('beforeend',`<article class="card"><label style="font-size:11px;font-weight:700;color:var(--primary-main);margin-bottom:6px">📸 Fotografía del servicio</label><div class="admin-drop-zone" onclick="document.getElementById('serv-file-${i}').click()" ondragover="event.preventDefault()" ondrop="manejarDropServicio(event,${i})"><img id="serv-preview-${i}" src="${escapeAttr(s.imagen)}" alt=""><div class="drop-hint">Subir o cambiar fotografía</div></div><input type="file" id="serv-file-${i}" accept="image/*" hidden onchange="manejarInputServicio(this,${i})"><h3>${escapeHTML(s.nombre)}</h3><p style="font-size:13px;color:var(--text-muted)">Precio: S/ ${Number(s.precio).toFixed(2)}</p><p style="font-size:11px;color:var(--text-muted)">Puedes reemplazar la fotografía cuando quieras.</p></article>`);
- });
-}
-function actualizarPreviewAdmin(i){const val=parseFloat(document.getElementById(`admin-precio-${i}`).value)||0;document.getElementById(`admin-calc-${i}`).textContent=(val*(1+COMISION)).toFixed(2)}
-function optimizarImagen(file){
- return new Promise((resolve,reject)=>{
-  if(!file||!file.type.startsWith('image/'))return reject(new Error('Selecciona un archivo de imagen.'));
-  if(file.size>8*1024*1024)return reject(new Error('La imagen supera los 8 MB. Elige una más ligera.'));
-  const reader=new FileReader();
-  reader.onerror=()=>reject(new Error('No se pudo leer la imagen.'));
-  reader.onload=e=>{
-   const img=new Image();img.onerror=()=>reject(new Error('El archivo de imagen no es válido.'));
-   img.onload=()=>{
-    const max=1200,scale=Math.min(1,max/Math.max(img.width,img.height));
-    const canvas=document.createElement('canvas');canvas.width=Math.round(img.width*scale);canvas.height=Math.round(img.height*scale);
-    canvas.getContext('2d').drawImage(img,0,0,canvas.width,canvas.height);
-    resolve(canvas.toDataURL('image/jpeg',.78));
-   };img.src=e.target.result;
-  };reader.readAsDataURL(file);
- });
-}
-async function ponerImagenProducto(file,i){try{const data=await optimizarImagen(file);productos[i].imagen=data;document.getElementById(`prod-preview-${i}`).src=data}catch(e){alert(e.message)}}
-async function ponerImagenServicio(file,i){try{const data=await optimizarImagen(file);servicios[i].imagen=data;document.getElementById(`serv-preview-${i}`).src=data}catch(e){alert(e.message)}}
-function manejarInputProducto(input,i){if(input.files&&input.files[0])ponerImagenProducto(input.files[0],i)}
-function manejarDropProducto(e,i){e.preventDefault();if(e.dataTransfer.files&&e.dataTransfer.files[0])ponerImagenProducto(e.dataTransfer.files[0],i)}
-function manejarInputServicio(input,i){if(input.files&&input.files[0])ponerImagenServicio(input.files[0],i)}
-function manejarDropServicio(e,i){e.preventDefault();if(e.dataTransfer.files&&e.dataTransfer.files[0])ponerImagenServicio(e.dataTransfer.files[0],i)}
-function guardarYVolver(){
+
+/* CARGAR DATOS DESDE SUPABASE */
+async function cargarDatosSupabase(){
  try{
-  productos.forEach((p,i)=>{const el=document.getElementById(`admin-precio-${i}`);const v=Number(el.value);if(!Number.isFinite(v)||v<0)throw new Error(`Revisa el precio de ${p.nombre}.`);p.precioBase=v});
+  const [rp,rs]=await Promise.all([
+   supabaseClient.from('productos').select('*'),
+   supabaseClient.from('servicios').select('*')
+  ]);
+
+  if(rp.error)throw new Error('Productos: '+rp.error.message);
+  if(rs.error)throw new Error('Servicios: '+rs.error.message);
+
+  if(rp.data&&rp.data.length){
+   productos=productosPorDefecto.map(def=>{
+    const local=productos.find(p=>p.id===def.id)||def;
+    const row=rp.data.find(r=>String(r.id)===def.id);
+
+    if(!row)return local;
+
+    return {
+     ...local,
+     nombre:row.nombre||local.nombre,
+     precioBase:Number(row.precio??local.precioBase),
+     imagen:row.imagen||local.imagen,
+     categoria:row.categoria||local.categoria,
+     beneficios:row.beneficios||row.descripcion||local.beneficios,
+     ingredientes:row.detalles||local.ingredientes,
+     subtitulo:row.subtitulo||local.subtitulo
+    };
+   });
+  }
+
+  if(rs.data&&rs.data.length){
+   servicios=serviciosPorDefecto.map(def=>{
+    const local=servicios.find(s=>s.id===def.id)||def;
+    const row=rs.data.find(r=>String(r.id)===def.id);
+
+    if(!row)return local;
+
+    return {
+     ...local,
+     nombre:row.nombre||local.nombre,
+     descripcion:row.descripcion||local.descripcion,
+     incluye:row.incluye||local.incluye,
+     precio:Number(row.precio??local.precio),
+     imagen:row.imagen||local.imagen
+    };
+   });
+  }
+
   localStorage.setItem('aura_productos',JSON.stringify(productos));
   localStorage.setItem('aura_servicios',JSON.stringify(servicios));
-  renderizarCliente();renderizarServicios();alert('Cambios guardados en este navegador. Las imágenes y precios se conservarán aquí.');cambiarVista('suplementos');
- }catch(e){alert(e.message||'No se pudieron guardar los cambios.')}
+  supabaseDisponible=true;
+  return true;
+
+ }catch(e){
+  console.error('Error al cargar Supabase:',e);
+  supabaseDisponible=false;
+  return false;
+ }
 }
+
+/* AGREGAR SOLAMENTE LOS REGISTROS QUE FALTAN */
+async function inicializarDatosSiFaltan(){
+ const {data:userData,error:userError}=await supabaseClient.auth.getUser();
+
+ if(userError||!userData.user||userData.user.email!==ADMIN_EMAIL){
+  throw new Error('No hay una sesión de administrador válida.');
+ }
+
+ const {data:existentes,error}=await supabaseClient.from('productos').select('id');
+ if(error)throw error;
+
+ const ids=new Set((existentes||[]).map(x=>String(x.id)));
+ const faltantes=productos.filter(p=>!ids.has(p.id));
+
+ if(faltantes.length){
+  const filas=faltantes.map(p=>({
+   id:p.id,
+   nombre:p.nombre,
+   precio:p.precioBase,
+   imagen:p.imagen||'',
+   categoria:p.categoria,
+   descripcion:p.beneficios,
+   detalles:p.ingredientes,
+   subtitulo:p.subtitulo,
+   beneficios:p.beneficios
+  }));
+
+  const {error:insertError}=await supabaseClient.from('productos').insert(filas);
+  if(insertError)throw insertError;
+ }
+
+ const {data:servExistentes,error:servError}=await supabaseClient.from('servicios').select('id');
+ if(servError)throw servError;
+
+ const servIds=new Set((servExistentes||[]).map(x=>String(x.id)));
+ const servFaltantes=servicios.filter(s=>!servIds.has(s.id));
+
+ if(servFaltantes.length){
+  const filas=servFaltantes.map(s=>({
+   id:s.id,
+   nombre:s.nombre,
+   descripcion:s.descripcion,
+   incluye:s.incluye,
+   precio:s.precio,
+   imagen:s.imagen
+  }));
+
+  const {error:servInsertError}=await supabaseClient.from('servicios').insert(filas);
+  if(servInsertError)throw servInsertError;
+ }
+}
+
+/* ACCESO ADMINISTRADOR CORREGIDO */
+async function verificarAdmin(){
+ const email=document.getElementById('admin-email').value.trim().toLowerCase();
+ const password=document.getElementById('admin-pass').value;
+ const error=document.getElementById('error-login');
+ const boton=document.querySelector('#vista-login button');
+
+ error.style.display='none';
+
+ if(!email||!password){
+  error.textContent='Ingresa tu correo y contraseña.';
+  error.style.display='block';
+  return;
+ }
+
+ boton.disabled=true;
+ boton.textContent='Verificando acceso...';
+
+ try{
+  const {data,error:authError}=await supabaseClient.auth.signInWithPassword({
+   email:email,
+   password:password
+  });
+
+  if(authError)throw authError;
+
+  if(!data.user||data.user.email.toLowerCase()!==ADMIN_EMAIL.toLowerCase()){
+   await supabaseClient.auth.signOut();
+   throw new Error('Este correo no está autorizado para administrar la tienda.');
+  }
+
+  // La inicialización no bloqueará el ingreso al panel.
+  try{
+   await inicializarDatosSiFaltan();
+  }catch(errorDatos){
+   console.error('No se pudieron inicializar algunos datos:',errorDatos);
+  }
+
+  // Cargar datos remotos sin impedir el acceso si falla la lectura.
+  await cargarDatosSupabase();
+
+  renderizarAdmin();
+  cambiarVista('admin');
+
+ }catch(e){
+  console.error('Error de acceso:',e);
+  error.textContent='No se pudo ingresar: '+(e.message||'Verifica tu correo y contraseña.');
+  error.style.display='block';
+ }finally{
+  boton.disabled=false;
+  boton.textContent='Ingresar al panel';
+ }
+}
+
+async function cerrarSesionAdmin(){
+ try{
+  await supabaseClient.auth.signOut();
+ }catch(e){
+  console.error('Error al cerrar sesión:',e);
+ }
+
+ document.getElementById('admin-email').value='';
+ document.getElementById('admin-pass').value='';
+ cambiarVista('suplementos');
+}
+
+/* TIENDA */
+function renderizarCliente(){
+ const grid=document.getElementById('grid-suplementos');
+ grid.innerHTML='';
+
+ const lista=categoriaActual==='todos'
+  ?productos
+  :productos.filter(p=>p.categoria===categoriaActual);
+
+ if(!lista.length){
+  grid.innerHTML='<p>No hay productos en esta categoría.</p>';
+  return;
+ }
+
+ lista.forEach(p=>{
+  const precio=p.precioBase*(1+COMISION);
+
+  grid.insertAdjacentHTML('beforeend',`
+  <article class="card">
+   <div>
+    <div class="card-img-container">
+     <img src="${escapeAttr(p.imagen||'')}" alt="${escapeAttr(p.nombre)}" onerror="this.style.display='none'">
+    </div>
+    <h3>${escapeHTML(p.nombre)}</h3>
+    <div class="subtitle">${escapeHTML(p.subtitulo)}</div>
+    <div class="info-block"><strong>Información:</strong> ${escapeHTML(p.beneficios)}</div>
+    <div class="info-block"><strong>Ingredientes:</strong> ${escapeHTML(p.ingredientes)}</div>
+   </div>
+   <div class="card-footer">
+    <div class="price">S/ ${precio.toFixed(2)}</div>
+    <button class="btn" onclick="agregarAlCarrito('${p.id}')">Agregar</button>
+   </div>
+  </article>`);
+ });
+}
+
+function renderizarServicios(){
+ const grid=document.getElementById('grid-servicios');
+ const select=document.getElementById('booking-servicio');
+
+ grid.innerHTML='';
+ select.innerHTML='';
+
+ servicios.forEach(s=>{
+  grid.insertAdjacentHTML('beforeend',`
+  <article class="card service-card">
+   <div>
+    <div class="card-img-container">
+     <img src="${escapeAttr(s.imagen)}" alt="${escapeAttr(s.nombre)}" onerror="this.src='https://placehold.co/800x500/f1f5f9/0b3c3d?text=Aura+Wellness+%26+Beauty'">
+    </div>
+    <h3>${escapeHTML(s.nombre)}</h3>
+    <p style="font-size:13px;color:var(--text-muted)">${escapeHTML(s.descripcion)}</p>
+    <div class="service-includes"><strong>Incluye:</strong> ${escapeHTML(s.incluye)}</div>
+   </div>
+   <div class="card-footer">
+    <span class="service-price">S/ ${Number(s.precio).toFixed(2)}</span>
+    <button class="btn" onclick="seleccionarServicio('${s.id}')">Solicitar</button>
+   </div>
+  </article>`);
+
+  select.add(new Option(
+   `${s.nombre} - S/ ${Number(s.precio).toFixed(2)}`,
+   s.id
+  ));
+ });
+}
+
+function seleccionarServicio(id){
+ document.getElementById('booking-servicio').value=id;
+ document.querySelector('.booking-container').scrollIntoView({
+  behavior:'smooth',
+  block:'center'
+ });
+}
+
+/* PANEL ADMINISTRADOR */
+function renderizarAdmin(){
+ const grid=document.getElementById('grid-admin');
+ grid.innerHTML='';
+
+ productos.forEach((p,i)=>{
+  grid.insertAdjacentHTML('beforeend',`
+  <article class="card">
+   <label style="font-size:11px;font-weight:700;color:var(--primary-main);margin-bottom:6px">📸 Imagen del producto</label>
+   <div class="admin-drop-zone"
+    onclick="document.getElementById('prod-file-${i}').click()"
+    ondragover="event.preventDefault()"
+    ondrop="manejarDropProducto(event,${i})">
+    <img id="prod-preview-${i}" src="${escapeAttr(p.imagen||'')}" alt="">
+    <div class="drop-hint">Subir o cambiar imagen</div>
+   </div>
+
+   <input type="file" id="prod-file-${i}" accept="image/*" hidden onchange="manejarInputProducto(this,${i})">
+
+   <div class="admin-controls">
+    <label>Precio base (S/)</label>
+    <input type="number" min="0" step="0.01" id="admin-precio-${i}" value="${Number(p.precioBase)}">
+    <label>Precio al público (+20%): S/ <span id="admin-calc-${i}">${(p.precioBase*1.2).toFixed(2)}</span></label>
+   </div>
+
+   <h3>${escapeHTML(p.nombre)}</h3>
+   <div class="subtitle">${escapeHTML(p.categoria)}</div>
+  </article>`);
+
+  document.getElementById(`admin-precio-${i}`).addEventListener('input',()=>{
+   actualizarPreviewAdmin(i);
+  });
+ });
+
+ const gs=document.getElementById('grid-admin-servicios');
+ gs.innerHTML='';
+
+ servicios.forEach((s,i)=>{
+  gs.insertAdjacentHTML('beforeend',`
+  <article class="card">
+   <label style="font-size:11px;font-weight:700;color:var(--primary-main);margin-bottom:6px">📸 Fotografía del servicio</label>
+   <div class="admin-drop-zone"
+    onclick="document.getElementById('serv-file-${i}').click()"
+    ondragover="event.preventDefault()"
+    ondrop="manejarDropServicio(event,${i})">
+    <img id="serv-preview-${i}" src="${escapeAttr(s.imagen)}" alt="">
+    <div class="drop-hint">Subir o cambiar fotografía</div>
+   </div>
+
+   <input type="file" id="serv-file-${i}" accept="image/*" hidden onchange="manejarInputServicio(this,${i})">
+
+   <h3>${escapeHTML(s.nombre)}</h3>
+   <p style="font-size:13px;color:var(--text-muted)">Precio: S/ ${Number(s.precio).toFixed(2)}</p>
+   <p style="font-size:11px;color:var(--text-muted)">Puedes reemplazar la fotografía cuando quieras.</p>
+  </article>`);
+ });
+}
+
+function actualizarPreviewAdmin(i){
+ const val=parseFloat(document.getElementById(`admin-precio-${i}`).value)||0;
+ document.getElementById(`admin-calc-${i}`).textContent=(val*(1+COMISION)).toFixed(2);
+}
+
+/* IMÁGENES */
+function optimizarImagen(file){
+ return new Promise((resolve,reject)=>{
+  if(!file||!file.type.startsWith('image/')){
+   return reject(new Error('Selecciona un archivo de imagen.'));
+  }
+
+  if(file.size>8*1024*1024){
+   return reject(new Error('La imagen supera los 8 MB. Elige una más ligera.'));
+  }
+
+  const reader=new FileReader();
+
+  reader.onerror=()=>reject(new Error('No se pudo leer la imagen.'));
+
+  reader.onload=e=>{
+   const img=new Image();
+
+   img.onerror=()=>reject(new Error('El archivo de imagen no es válido.'));
+
+   img.onload=()=>{
+    const max=1200;
+    const scale=Math.min(1,max/Math.max(img.width,img.height));
+    const canvas=document.createElement('canvas');
+
+    canvas.width=Math.round(img.width*scale);
+    canvas.height=Math.round(img.height*scale);
+
+    canvas.getContext('2d').drawImage(img,0,0,canvas.width,canvas.height);
+
+    resolve(canvas.toDataURL('image/jpeg',.78));
+   };
+
+   img.src=e.target.result;
+  };
+
+  reader.readAsDataURL(file);
+ });
+}
+
+async function ponerImagenProducto(file,i){
+ try{
+  const data=await optimizarImagen(file);
+  productos[i].imagen=data;
+  document.getElementById(`prod-preview-${i}`).src=data;
+ }catch(e){
+  alert(e.message);
+ }
+}
+
+async function ponerImagenServicio(file,i){
+ try{
+  const data=await optimizarImagen(file);
+  servicios[i].imagen=data;
+  document.getElementById(`serv-preview-${i}`).src=data;
+ }catch(e){
+  alert(e.message);
+ }
+}
+
+function manejarInputProducto(input,i){
+ if(input.files&&input.files[0])ponerImagenProducto(input.files[0],i);
+}
+
+function manejarDropProducto(e,i){
+ e.preventDefault();
+ if(e.dataTransfer.files&&e.dataTransfer.files[0]){
+  ponerImagenProducto(e.dataTransfer.files[0],i);
+ }
+}
+
+function manejarInputServicio(input,i){
+ if(input.files&&input.files[0])ponerImagenServicio(input.files[0],i);
+}
+
+function manejarDropServicio(e,i){
+ e.preventDefault();
+ if(e.dataTransfer.files&&e.dataTransfer.files[0]){
+  ponerImagenServicio(e.dataTransfer.files[0],i);
+ }
+}
+
+/* SUBIR IMAGEN A SUPABASE STORAGE */
+async function guardarImagenStorage(imagen,carpeta,id){
+ if(!imagen)return '';
+
+ if(!imagen.startsWith('data:image/'))return imagen;
+
+ const respuesta=await fetch(imagen);
+ const blob=await respuesta.blob();
+
+ const ruta=`${carpeta}/${id}-${Date.now()}.jpg`;
+
+ const {error}=await supabaseClient.storage.from('productos').upload(ruta,blob,{
+  contentType:'image/jpeg',
+  upsert:false
+ });
+
+ if(error){
+  throw new Error('Error al subir imagen de '+id+': '+error.message);
+ }
+
+ const {data}=supabaseClient.storage.from('productos').getPublicUrl(ruta);
+
+ return data.publicUrl;
+}
+
+/* GUARDAR CAMBIOS EN SUPABASE */
+async function guardarYVolver(){
+ const boton=document.querySelector('#vista-admin button[onclick="guardarYVolver()"]');
+
+ if(boton){
+  boton.disabled=true;
+  boton.textContent='Guardando en Supabase...';
+ }
+
+ try{
+  const {data:userData,error:userError}=await supabaseClient.auth.getUser();
+
+  if(userError||!userData.user||userData.user.email!==ADMIN_EMAIL){
+   throw new Error('Tu sesión de administrador no está activa. Ingresa nuevamente.');
+  }
+
+  // Validar y actualizar precios.
+  productos.forEach((p,i)=>{
+   const el=document.getElementById(`admin-precio-${i}`);
+   const v=Number(el.value);
+
+   if(!Number.isFinite(v)||v<0){
+    throw new Error(`Revisa el precio de ${p.nombre}.`);
+   }
+
+   p.precioBase=v;
+  });
+
+  // Subir únicamente las imágenes nuevas.
+  for(const p of productos){
+   p.imagen=await guardarImagenStorage(p.imagen,'productos',p.id);
+  }
+
+  for(const s of servicios){
+   s.imagen=await guardarImagenStorage(s.imagen,'servicios',s.id);
+  }
+
+  const filasProductos=productos.map(p=>({
+   id:p.id,
+   nombre:p.nombre,
+   precio:Number(p.precioBase),
+   imagen:p.imagen||'',
+   categoria:p.categoria,
+   descripcion:p.beneficios,
+   detalles:p.ingredientes,
+   subtitulo:p.subtitulo,
+   beneficios:p.beneficios,
+   actualizado_en:new Date().toISOString()
+  }));
+
+  const {error:productosError}=await supabaseClient
+   .from('productos')
+   .upsert(filasProductos,{onConflict:'id'});
+
+  if(productosError){
+   throw new Error('No se pudieron guardar los productos: '+productosError.message);
+  }
+
+  const filasServicios=servicios.map(s=>({
+   id:s.id,
+   nombre:s.nombre,
+   descripcion:s.descripcion,
+   incluye:s.incluye,
+   precio:Number(s.precio),
+   imagen:s.imagen||'',
+   actualizado_en:new Date().toISOString()
+  }));
+
+  const {error:serviciosError}=await supabaseClient
+   .from('servicios')
+   .upsert(filasServicios,{onConflict:'id'});
+
+  if(serviciosError){
+   throw new Error('No se pudieron guardar los servicios: '+serviciosError.message);
+  }
+
+  localStorage.setItem('aura_productos',JSON.stringify(productos));
+  localStorage.setItem('aura_servicios',JSON.stringify(servicios));
+
+  renderizarCliente();
+  renderizarServicios();
+
+  alert('¡Cambios guardados correctamente en Supabase! Tus productos, precios e imágenes estarán disponibles desde otros dispositivos.');
+
+  cambiarVista('suplementos');
+
+ }catch(e){
+  console.error('Error al guardar:',e);
+  alert(e.message||'No se pudieron guardar los cambios. Revisa la conexión y los permisos de Supabase.');
+ }finally{
+  if(boton){
+   boton.disabled=false;
+   boton.textContent='💾 Guardar cambios y ver tienda';
+  }
+ }
+}
+
+/* CARRITO */
 function agregarAlCarrito(id){
- const p=productos.find(x=>x.id===id);if(!p)return;
- const precio=p.precioBase*(1+COMISION),item=carrito.find(x=>x.id===id);
- if(item)item.cantidad++;else carrito.push({id,nombre:p.nombre,imagen:p.imagen,precio,cantidad:1});
- actualizarCarrito();alert('Producto agregado al carrito.');
+ const p=productos.find(x=>x.id===id);
+ if(!p)return;
+
+ const precio=p.precioBase*(1+COMISION);
+ const item=carrito.find(x=>x.id===id);
+
+ if(item){
+  item.cantidad++;
+ }else{
+  carrito.push({
+   id,
+   nombre:p.nombre,
+   imagen:p.imagen,
+   precio,
+   cantidad:1
+  });
+ }
+
+ actualizarCarrito();
+ alert('Producto agregado al carrito.');
 }
-function cambiarCantidad(id,cambio){const item=carrito.find(x=>x.id===id);if(!item)return;item.cantidad+=cambio;if(item.cantidad<=0)carrito=carrito.filter(x=>x.id!==id);actualizarCarrito()}
-function eliminarDelCarrito(id){carrito=carrito.filter(x=>x.id!==id);actualizarCarrito()}
+
+function cambiarCantidad(id,cambio){
+ const item=carrito.find(x=>x.id===id);
+ if(!item)return;
+
+ item.cantidad+=cambio;
+
+ if(item.cantidad<=0){
+  carrito=carrito.filter(x=>x.id!==id);
+ }
+
+ actualizarCarrito();
+}
+
+function eliminarDelCarrito(id){
+ carrito=carrito.filter(x=>x.id!==id);
+ actualizarCarrito();
+}
+
 function actualizarCarrito(){
- const c=document.getElementById('cart-items-container'),t=document.getElementById('cart-total-text'),cnt=document.getElementById('cart-count');c.innerHTML='';
- let total=0,unidades=0;
- if(!carrito.length){c.innerHTML='<p style="color:var(--text-muted)">Tu carrito está vacío.</p>';t.textContent='Total: S/ 0.00';cnt.textContent='0';return}
- carrito.forEach(i=>{const sub=i.precio*i.cantidad;total+=sub;unidades+=i.cantidad;c.insertAdjacentHTML('beforeend',`<div class="cart-item"><img src="${escapeAttr(i.imagen||'')}" alt="${escapeAttr(i.nombre)}" onerror="this.style.visibility='hidden'"><div class="cart-item-info"><strong>${escapeHTML(i.nombre)}</strong><span>Precio unitario: S/ ${i.precio.toFixed(2)}</span><div class="cart-actions"><button onclick="cambiarCantidad('${i.id}',-1)">−</button><span>${i.cantidad}</span><button onclick="cambiarCantidad('${i.id}',1)">+</button><button onclick="eliminarDelCarrito('${i.id}')">Eliminar</button></div></div><strong>S/ ${sub.toFixed(2)}</strong></div>`)});t.textContent=`Total: S/ ${total.toFixed(2)}`;cnt.textContent=unidades;
+ const c=document.getElementById('cart-items-container');
+ const t=document.getElementById('cart-total-text');
+ const cnt=document.getElementById('cart-count');
+
+ c.innerHTML='';
+
+ let total=0;
+ let unidades=0;
+
+ if(!carrito.length){
+  c.innerHTML='<p style="color:var(--text-muted)">Tu carrito está vacío.</p>';
+  t.textContent='Total: S/ 0.00';
+  cnt.textContent='0';
+  return;
+ }
+
+ carrito.forEach(i=>{
+  const sub=i.precio*i.cantidad;
+  total+=sub;
+  unidades+=i.cantidad;
+
+  c.insertAdjacentHTML('beforeend',`
+  <div class="cart-item">
+   <img src="${escapeAttr(i.imagen||'')}" alt="${escapeAttr(i.nombre)}" onerror="this.style.visibility='hidden'">
+   <div class="cart-item-info">
+    <strong>${escapeHTML(i.nombre)}</strong>
+    <span>Precio unitario: S/ ${i.precio.toFixed(2)}</span>
+    <div class="cart-actions">
+     <button onclick="cambiarCantidad('${i.id}',-1)">−</button>
+     <span>${i.cantidad}</span>
+     <button onclick="cambiarCantidad('${i.id}',1)">+</button>
+     <button onclick="eliminarDelCarrito('${i.id}')">Eliminar</button>
+    </div>
+   </div>
+   <strong>S/ ${sub.toFixed(2)}</strong>
+  </div>`);
+ });
+
+ t.textContent=`Total: S/ ${total.toFixed(2)}`;
+ cnt.textContent=unidades;
 }
+
 function enviarWhatsApp(){
- const nom=document.getElementById('cliente-nombre').value.trim(),dir=document.getElementById('cliente-direccion').value.trim(),tel=document.getElementById('cliente-telefono').value.trim();
- if(!carrito.length||!nom||!dir||!tel){alert('Completa tu nombre, dirección, teléfono y agrega al menos un producto.');return}
- if(!/^[0-9+\s-]{7,15}$/.test(tel)){alert('Revisa el número de teléfono.');return}
- let msg='PEDIDO AURA WELLNESS & BEAUTY\nCliente: '+nom+'\nDirección: '+dir+'\nTeléfono: '+tel+'\n\nDETALLE DEL PEDIDO:\n',total=0;
- carrito.forEach(i=>{const sub=i.precio*i.cantidad;total+=sub;msg+=`\n${i.nombre}\nCantidad: ${i.cantidad}\nPrecio unitario: S/ ${i.precio.toFixed(2)}\nSubtotal: S/ ${sub.toFixed(2)}\n`});
+ const nom=document.getElementById('cliente-nombre').value.trim();
+ const dir=document.getElementById('cliente-direccion').value.trim();
+ const tel=document.getElementById('cliente-telefono').value.trim();
+
+ if(!carrito.length||!nom||!dir||!tel){
+  alert('Completa tu nombre, dirección, teléfono y agrega al menos un producto.');
+  return;
+ }
+
+ if(!/^[0-9+\s-]{7,15}$/.test(tel)){
+  alert('Revisa el número de teléfono.');
+  return;
+ }
+
+ let msg='PEDIDO AURA WELLNESS & BEAUTY\nCliente: '+nom+'\nDirección: '+dir+'\nTeléfono: '+tel+'\n\nDETALLE DEL PEDIDO:\n';
+ let total=0;
+
+ carrito.forEach(i=>{
+  const sub=i.precio*i.cantidad;
+  total+=sub;
+
+  msg+=`\n${i.nombre}\nCantidad: ${i.cantidad}\nPrecio unitario: S/ ${i.precio.toFixed(2)}\nSubtotal: S/ ${sub.toFixed(2)}\n`;
+ });
+
  msg+='\nTOTAL GENERAL: S/ '+total.toFixed(2);
- window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`,'_blank','noopener');
+
+ window.open(
+  `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`,
+  '_blank',
+  'noopener'
+ );
 }
+
+/* SOLICITUD DE SERVICIO */
 function agendarServicioWhatsApp(){
- const id=document.getElementById('booking-servicio').value,s=servicios.find(x=>x.id===id),zona=document.getElementById('booking-zona').value;
- const nom=document.getElementById('booking-nombre').value.trim(),tel=document.getElementById('booking-telefono').value.trim(),dir=document.getElementById('booking-direccion').value.trim(),ref=document.getElementById('booking-referencia').value.trim();
- if(!s||!nom||!tel||!dir){alert('Completa el servicio, nombre, teléfono y dirección.');return}
- if(!/^[0-9+\s-]{7,15}$/.test(tel)){alert('Revisa el número de teléfono.');return}
- let msg='SOLICITUD DE SERVICIO - AURA WELLNESS & BEAUTY\n\nServicio: '+s.nombre+'\nPrecio referencial: S/ '+Number(s.precio).toFixed(2)+'\nZona: '+zona+'\nCliente: '+nom+'\nTeléfono: '+tel+'\nDirección: '+dir+'\nReferencia: '+(ref||'No indicada')+'\n\nFecha y hora: Pendientes de coordinación.\nEstado: Solicitud pendiente de confirmación.';
- window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`,'_blank','noopener');
+ const id=document.getElementById('booking-servicio').value;
+ const s=servicios.find(x=>x.id===id);
+ const zona=document.getElementById('booking-zona').value;
+ const nom=document.getElementById('booking-nombre').value.trim();
+ const tel=document.getElementById('booking-telefono').value.trim();
+ const dir=document.getElementById('booking-direccion').value.trim();
+ const ref=document.getElementById('booking-referencia').value.trim();
+
+ if(!s||!nom||!tel||!dir){
+  alert('Completa el servicio, nombre, teléfono y dirección.');
+  return;
+ }
+
+ if(!/^[0-9+\s-]{7,15}$/.test(tel)){
+  alert('Revisa el número de teléfono.');
+  return;
+ }
+
+ let msg='SOLICITUD DE SERVICIO - AURA WELLNESS & BEAUTY\n\nServicio: '+s.nombre+
+ '\nPrecio referencial: S/ '+Number(s.precio).toFixed(2)+
+ '\nZona: '+zona+
+ '\nCliente: '+nom+
+ '\nTeléfono: '+tel+
+ '\nDirección: '+dir+
+ '\nReferencia: '+(ref||'No indicada')+
+ '\n\nFecha y hora: Pendientes de coordinación.\nEstado: Solicitud pendiente de confirmación.';
+
+ window.open(
+  `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`,
+  '_blank',
+  'noopener'
+ );
 }
-function escapeHTML(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-function escapeAttr(v){return escapeHTML(v)}
-window.addEventListener('DOMContentLoaded',()=>{renderizarCliente();renderizarServicios();actualizarCarrito()});
+
+/* PROTEGER TEXTO MOSTRADO EN HTML */
+function escapeHTML(v){
+ return String(v??'').replace(/[&<>"']/g,c=>({
+  '&':'&amp;',
+  '<':'&lt;',
+  '>':'&gt;',
+  '"':'&quot;',
+  "'":'&#39;'
+ }[c]));
+}
+
+function escapeAttr(v){
+ return escapeHTML(v);
+}
+
+/* INICIO DE LA TIENDA */
+window.addEventListener('DOMContentLoaded',async()=>{
+ await cargarDatosSupabase();
+ renderizarCliente();
+ renderizarServicios();
+ actualizarCarrito();
+});
 </script>
 </body>
 </html>

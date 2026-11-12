@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aura Wellness & Beauty | Black Diamonds & Vital Health</title>
+    <style>
+        :root {
+            --primary-dark: #072b2c;
+            --primary-main: #0b3c3d;
+            --accent-gold: #c5a059;
+            --bg-light: #f8fafc;
+            --text-dark: #1e293b;
+            --text-muted: #64748b;
+            --white: #ffffff;
+            --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; scroll-behavior: smooth; }
+        body { background-color: var(--bg-light); color: var(--text-dark); line-height: 1.6; }
+
+        header {
+            background-color: var(--primary-dark);
+            color: var(--white);
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--accent-gold);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo-area { display: flex; align-items: center; gap: 12px; }
+        .logo-badge { background: var(--accent-gold); color: var(--primary-dark); font-weight: 800; padding: 8px 12px; border-radius: 6px; }
+        .logo-text { font-size: 17px; font-weight: 700; text-transform: uppercase; color: var(--white); text-decoration: none; cursor: pointer; }
+
+        nav { display: flex; gap: 6px; flex-wrap: wrap; }
+        nav a { color: var(--white); text-decoration: none; font-weight: 600; font-size: 13px; padding: 8px 12px; border-radius: 6px; transition: 0.3s; cursor: pointer; }
+        nav a:hover, nav a.active { background-color: var(--accent-gold); color: var(--primary-dark); }
+
+        .tab-section { display: none; max-width: 1300px; margin: 40px auto; padding: 0 20px; min-height: 60vh; }
+        .tab-section.active-tab { display: block; }
+
+        .section-header { text-align: center; margin-bottom: 30px; }
+        .section-header h2 { font-size: 26px; color: var(--primary-main); text-transform: uppercase; margin-bottom: 8px; }
+        .section-header p { color: var(--text-muted); font-size: 14px; }
+
+        /* Categorías de Filtro */
+        .categorias-bar { display: flex; justify-content: center; gap: 10px; margin-bottom: 30px; flex-wrap: wrap; }
+        .cat-btn { background: var(--white); border: 1px solid #cbd5e1; padding: 8px 16px; border-radius: 20px; font-size: 12px; font-weight: 600; cursor: pointer; transition: 0.3s; color: var(--text-dark); }
+        .cat-btn:hover, .cat-btn.active-cat { background: var(--primary-main); color: var(--white); border-color: var(--primary-main); }
+
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 25px; }
+
+        .card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: var(--shadow);
+            border: 1px solid #e2e8f0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card-img-container {
+            width: 100%;
+            height: 260px;
+            background: #f1f5f9;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            overflow: hidden;
+            position: relative;
+        }
+        .card-img-container img { max-height: 100%; max-width: 100%; object-fit: contain; }
+
+        /* Controles de arrastre en Panel Admin */
+        .admin-drop-zone {
+            width: 100%;
+            height: 200px;
+            background: #f8fafc;
+            border: 2px dashed var(--accent-gold);
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            margin-bottom: 12px;
+            position: relative;
+            overflow: hidden;
+            transition: 0.3s;
+        }
+        .admin-drop-zone:hover { background: #f1f5f9; border-color: var(--primary-main); }
+        .admin-drop-zone img { max-height: 120px; max-width: 100%; object-fit: contain; margin-bottom: 5px; }
+        .drop-hint { font-size: 10px; color: var(--primary-main); font-weight: 700; text-transform: uppercase; background: rgba(255,255,255,0.9); padding: 3px 6px; border-radius: 4px; }
+
+        .admin-controls { background: #f8fafc; padding: 12px; border-radius: 8px; margin-bottom: 12px; border: 1px solid #cbd5e1; }
+        .admin-controls label { font-size: 11px; font-weight: 700; color: var(--primary-main); display: block; margin-bottom: 3px; text-transform: uppercase; }
+        .admin-controls input { width: 100%; padding: 8px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 13px; margin-bottom: 8px; font-weight: bold; }
+
+        .card h3 { color: var(--primary-main); font-size: 20px; margin-bottom: 4px; text-transform: uppercase; }
+        .subtitle { font-size: 11px; color: var(--accent-gold); font-weight: 700; text-transform: uppercase; margin-bottom: 12px; }
+
+        .info-block { font-size: 12px; color: var(--text-muted); margin-bottom: 10px; background: #f8fafc; padding: 8px; border-radius: 6px; border-left: 3px solid var(--accent-gold); }
+        .info-block strong { color: var(--text-dark); }
+
+        .card-footer { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #f1f5f9; padding-top: 12px; margin-top: auto; }
+        .price { font-size: 17px; font-weight: 800; color: var(--primary-main); }
+        .btn { background: var(--primary-main); color: var(--white); padding: 9px 16px; border-radius: 6px; font-weight: 700; font-size: 11px; text-transform: uppercase; border: none; cursor: pointer; transition: 0.3s; }
+        .btn:hover { background: var(--accent-gold); color: var(--primary-dark); }
+
+        /* Módulo Estética / Booking */
+        .booking-container { background: var(--white); border-radius: 14px; padding: 30px; box-shadow: var(--shadow); max-width: 700px; margin: 0 auto; border: 1px solid #e2e8f0; }
+        .booking-container h3 { color: var(--primary-main); margin-bottom: 20px; text-transform: uppercase; font-size: 18px; }
+
+        .cart-container { background: var(--white); border-radius: 14px; padding: 30px; border: 2px solid var(--accent-gold); max-width: 800px; margin: 0 auto; box-shadow: var(--shadow); }
+        .cart-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid #e2e8f0; font-size: 14px; }
+        .cart-total { font-size: 22px; font-weight: 800; color: var(--primary-main); margin: 20px 0; text-align: right; }
+
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .form-group.full-width { grid-column: span 2; }
+        .form-group label { display: block; font-size: 11px; font-weight: 700; margin-bottom: 5px; color: var(--primary-main); text-transform: uppercase; }
+        .form-group input, .form-group select { width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 13px; }
+
+        .login-box { max-width: 380px; margin: 60px auto; background: var(--white); padding: 35px; border-radius: 14px; box-shadow: var(--shadow); border: 2px solid var(--accent-gold); text-align: center; }
+        .login-box h3 { color: var(--primary-main); margin-bottom: 15px; text-transform: uppercase; font-size: 18px; }
+        .login-box input { width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; margin-bottom: 12px; font-size: 13px; text-align: center; }
+
+        /* Legal Footer Styles */
+        footer { background-color: var(--primary-dark); color: var(--white); padding: 40px 5% 20px 5%; font-size: 13px; border-top: 3px solid var(--accent-gold); margin-top: 60px; }
+        .footer-content { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-bottom: 30px; }
+        .footer-col h4 { color: var(--accent-gold); margin-bottom: 12px; text-transform: uppercase; font-size: 14px; }
+        .footer-col p { color: #cbd5e1; font-size: 12px; line-height: 1.5; margin-bottom: 8px; }
+        .footer-bottom { text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; font-size: 12px; color: #94a3b8; }
+        .admin-link { color: #94a3b8; text-decoration: none; transition: 0.3s; cursor: pointer; }
+        .admin-link:hover { color: var(--accent-gold); }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-area">
+            <div class="logo-badge">BD</div>
+            <a class="logo-text" onclick="cambiarVista('suplementos')">Aura Wellness & Beauty</a>
+        </div>
+        <nav>
+            <a id="nav-suplementos" class="active" onclick="cambiarVista('suplementos')">Catálogo Suplementos</a>
+            <a id="nav-estetica" onclick="cambiarVista('estetica')">Servicios a Domicilio</a>
+            <a id="nav-carrito" onclick="cambiarVista('carrito')">🛒 Carrito (<span id="cart-count">0</span>)</a>
+        </nav>
+    </header>
+
+    <!-- MÓDULO 1: SUPLEMENTOS (Catálogo Completo Black Diamonds & Vital Health) -->
+    <div id="vista-suplementos" class="tab-section active-tab">
+        <div class="section-header">
+            <h2>Módulo de Salud y Bienestar (Vital Health)</h2>
+            <p>Selección oficial de suplementos respaldados por estándares internacionales.</p>
+        </div>
+        
+        <!-- Filtros por categoría técnica -->
+        <div class="categorias-bar">
+            <button class="cat-btn active-cat" onclick="filtrarCategoria('todos', this)">Todos</button>
+            <button class="cat-btn" onclick="filtrarCategoria('Control de Peso', this)">Control de Peso</button>
+            <button class="cat-btn" onclick="filtrarCategoria('Cuidado Hepático/Renal', this)">Cuidado Hepático/Renal</button>
+            <button class="cat-btn" onclick="filtrarCategoria('Energía y Rendimiento', this)">Energía y Rendimiento</button>
+            <button class="cat-btn" onclick="filtrarCategoria('Línea Infantil Einstein Kids', this)">Línea Infantil Einstein Kids</button>
+            <button class="cat-btn" onclick="filtrarCategoria('Cafés Funcionales', this)">Cafés Funcionales</button>
+            <button class="cat-btn" onclick="filtrarCategoria('Kits Completos', this)">Kits Completos</button>
+        </div>
+
+        <div class="grid" id="grid-suplementos"></div>
+    </div>
+
+    <!-- MÓDULO 2: ESTÉTICA Y SERVICIOS A DOMICILIO (Booking System) -->
+    <div id="vista-estetica" class="tab-section">
+        <div class="section-header">
+            <h2>Módulo de Estética y Servicios a Domicilio</h2>
+            <p>Atención profesional exclusiva en El Agustino y zonas aledañas.</p>
+        </div>
+        <div class="booking-container">
+            <h3>Agendar Cita de Estética</h3>
+            <div class="form-grid">
+                <div class="form-group full-width">
+                    <label>Seleccione Servicio:</label>
+                    <select id="booking-servicio">
+                        <option value="Manicure y Uñas a Domicilio">Manicure y Uñas a Domicilio - S/ 50.00</option>
+                        <option value="Pestañas Profesionales a Domicilio">Pestañas Profesionales a Domicilio - S/ 70.00</option>
+                        <option value="Pedicura Especializada a Domicilio">Pedicura Especializada a Domicilio - S/ 60.00</option>
+                        <option value="Kit Completo Estética (Manicure + Pestañas)">Kit Completo Estética (Manicure + Pestañas) - S/ 110.00</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Zona de Cobertura:</label>
+                    <select id="booking-zona">
+                        <option value="El Agustino (Centro/Zona Principal)">El Agustino (Centro / Principal)</option>
+                        <option value="El Agustino (Aledaños / Riva Agüero)">El Agustino (Aledaños / Riva Agüero)</option>
+                        <option value="Zonas Limítrofes Cercanas">Zonas Limítrofes Cercanas</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Fecha Requerida:</label>
+                    <input type="date" id="booking-fecha">
+                </div>
+                <div class="form-group">
+                    <label>Nombre del Cliente:</label>
+                    <input type="text" id="booking-nombre" placeholder="Ej. María Inga">
+                </div>
+                <div class="form-group">
+                    <label>Teléfono de Contacto:</label>
+                    <input type="tel" id="booking-telefono" placeholder="Ej. 987654321">
+                </div>
+                <div class="form-group full-width">
+                    <label>Dirección Exacta (El Agustino):</label>
+                    <input type="text" id="booking-direccion" placeholder="Ej. Calle Las Flores 123">
+                </div>
+            </div>
+            <button class="btn" style="width:100%; margin-top:20px; padding:14px; font-size:13px;" onclick="agendarServicioWhatsApp()">Confirmar Cita por WhatsApp 📲</button>
+        </div>
+    </div>
+
+    <!-- VISTA LOGIN ADMIN -->
+    <div id="vista-login" class="tab-section">
+        <div class="login-box">
+            <h3>🔐 Acceso Privado Admin</h3>
+            <p style="color:var(--text-muted); font-size:13px; margin-bottom:20px;">Introduce tu contraseña corporativa.</p>
+            <input type="password" id="admin-pass" placeholder="Contraseña (admin123)">
+            <button class="btn" style="width:100%; padding:11px;" onclick="verificarAdmin()">Ingresar al Panel 🚀</button>
+            <p style="margin-top:12px; font-size:12px; color:#ef4444; display:none;" id="error-login">Contraseña incorrecta.</p>
+        </div>
+    </div>
+
+    <!-- VISTA PANEL ADMIN PRIVADO -->
+    <div id="vista-admin" class="tab-section">
+        <div class="section-header" style="display:flex; justify-content:space-between; align-items:center; max-width:1300px; margin:0 auto 30px auto;">
+            <div>
+                <h2>Panel de Administración Privado</h2>
+                <p>Gestión de inventario, precios base y recursos gráficos.</p>
+            </div>
+            <button class="btn" style="background:#b91c1c;" onclick="cerrarSesionAdmin()">Cerrar Sesión 🔒</button>
+        </div>
+        <div class="grid" id="grid-admin"></div>
+        <div style="text-align: center; margin-top: 40px;">
+            <button class="btn" style="padding: 15px 40px; font-size: 14px; background:var(--accent-gold); color:var(--primary-dark);" onclick="guardarYVolver()">💾 Guardar Cambios y Ver Tienda</button>
+        </div>
+    </div>
+
+    <!-- VISTA CARRITO -->
+    <div id="vista-carrito" class="tab-section">
+        <div class="cart-container">
+            <h2>🛍️ Carrito de Pedidos (Suplementos)</h2>
+            <div id="cart-items-container"><p style="color:var(--text-muted)">Tu carrito está vacío.</p></div>
+            <div class="cart-total" id="cart-total-text">Total: S/ 0.00</div>
+
+            <div style="margin-top: 25px; border-top: 2px solid #e2e8f0; padding-top: 20px;">
+                <h3 style="color:var(--primary-main); font-size:16px; margin-bottom:15px; text-transform:uppercase;">Datos de Envío a Domicilio</h3>
+                <div class="form-grid">
+                    <div class="form-group full-width"><label>Nombre:</label><input type="text" id="cliente-nombre" placeholder="Ej. Piero Inga"></div>
+                    <div class="form-group full-width"><label>Dirección en El Agustino:</label><input type="text" id="cliente-direccion" placeholder="Ej. Av. Riva Agüero"></div>
+                    <div class="form-group full-width"><label>Teléfono:</label><input type="tel" id="cliente-telefono" placeholder="Ej. 987654321"></div>
+                </div>
+                <button onclick="enviarWhatsApp()" class="btn" style="width:100%; margin-top:20px; padding:15px; font-size:13px;">Enviar Pedido por WhatsApp (+51 940 815 597) 📲</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER CORPORATIVO CON AVISO LEGAL OBLIGATORIO -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-col">
+                <h4>Aura Wellness & Beauty</h4>
+                <p>Plataforma autorizada Black Diamonds & Vital Health. Soluciones integrales de nutrición premium y estética profesional en El Agustino, Lima.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Aviso Legal y Normativa</h4>
+                <p><strong>Ley N° 29733:</strong> Tus datos personales y direcciones de entrega son estrictamente confidenciales y protegidos.</p>
+                <p><strong>Exoneración de Responsabilidad:</strong> Este producto no es un medicamento. Su consumo es responsabilidad de quien lo recomienda y de quien lo usa. Consulte a su médico.</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Aura Wellness & Beauty. Todos los derechos reservados. | <a class="admin-link" onclick="irAlLogin()">⚙️ Panel Admin Privado</a></p>
+        </div>
+    </footer>
+
+    <script>
+        // Catálogo completo oficial con todos los productos organizados por sus categorías técnicas
+        let productosPorDefecto = [
+            {
+                id: 'v-te-detox',
+                nombre: 'V-Te Detox',
+                categoria: 'Control de Peso',
+                subtitulo: 'Infusión Herbal Purificante',
+                beneficios: 'Favorece la pérdida de peso, piel saludable, desinflamación abdominal y eliminación de toxinas.',
+                ingredientes: 'Hoja de Caqui, Hoja de Malva, Nopal, Jengibre, Cardo bendito, Manzanilla, Malvavisco.',
+                precioBase: 350.00,
+                imagen: 'img/v-te-detox.jpg'
+            },
+            {
+                id: 'v-organex',
+                nombre: 'V-Organex',
+                categoria: 'Cuidado Hepático/Renal',
+                subtitulo: 'Desintoxicación Hepática',
+                beneficios: 'Desintoxica el hígado, revitaliza el cuerpo, limpia vías biliares y previene padecimientos hepáticos.',
+                ingredientes: 'Boldo, Cardo mariano, Casia amara, Hierba del Sapo, Guaraná, Achicoria, Alcachofa.',
+                precioBase: 700.00,
+                imagen: 'img/v-organex.jpg'
+            },
+            {
+                id: 'v-itaren',
+                nombre: 'V-Itaren',
+                categoria: 'Cuidado Hepático/Renal',
+                subtitulo: 'Bienestar Renal',
+                beneficios: 'Equilibrio hídrico, circulación, desinflamación natural y desintoxicación renal.',
+                ingredientes: 'Jamaica, Cola de Caballo, Diente de León, Hierba del Sapo, Moringa, Uva ursi.',
+                precioBase: 700.00,
+                imagen: 'img/v-itaren.jpg'
+            },
+            {
+                id: 'v-glucalose',
+                nombre: 'V-Glucalose S-Balance',
+                categoria: 'Bienestar General',
+                subtitulo: 'Regulación de Glucosa y Metabolismo',
+                beneficios: 'Regulación de glucosa, trastornos hormonales en la mujer y sensibilidad a la insulina.',
+                ingredientes: 'Nopal, Chaya, Ajo, Uva ursi, Linaza, Cardo Mariano, Berberina, Fenogreco.',
+                precioBase: 700.00,
+                imagen: 'img/v-glucalose.jpg'
+            },
+            {
+                id: 'v-itadol',
+                nombre: 'V-Itadol',
+                categoria: 'Energía y Rendimiento',
+                subtitulo: 'Alivio Articular y Musculoesquelético',
+                beneficios: 'Ayuda a aliviar lesiones, artritis, dolores agudos y crónicos, reduciendo inflamación.',
+                ingredientes: 'Glucosamina, MSM, Zarzaparrilla.',
+                precioBase: 700.00,
+                imagen: 'img/v-itaren.jpg'
+            },
+            {
+                id: 'vitarly-l',
+                nombre: 'Vitarly-L',
+                categoria: 'Energía y Rendimiento',
+                subtitulo: 'Circulación y Energía Vital',
+                beneficios: 'Apoya una buena circulación, incrementa energía y mejora el flujo sanguíneo.',
+                ingredientes: 'L-arginina, Cafeína, Magnesio, Té Verde, Zinc, Vitamina B3, Coenzima Q10, Cromo.',
+                precioBase: 750.00,
+                imagen: 'img/v-organex.jpg'
+            },
+            {
+                id: 'v-glutation',
+                nombre: 'V-Glutation Cápsulas',
+                categoria: 'Bienestar General',
+                subtitulo: 'Regeneración Celular Avanzada',
+                beneficios: 'Nutre, protege y regenera a nivel celular con potente efecto antioxidante.',
+                ingredientes: 'Glutatión (GSH), Vitamina C, Extracto de Raíz de Cúrcuma y Rosa de Castilla.',
+                precioBase: 1670.00,
+                imagen: 'img/v-te-detox.jpg'
+            },
+            {
+                id: 'glutation-plus',
+                nombre: 'Glutation Plus (Gotas)',
+                categoria: 'Bienestar General',
+                subtitulo: 'Gotas Sublinguales Inmunológicas',
+                beneficios: 'Mejora salud celular, protege ante radicales libres y revitaliza la piel.',
+                ingredientes: 'Agua purificada, Glicerina, L-Cisteína, L-Glutatión, Tetrahidrocurcumina, Pulpa de Mango, Clorofila.',
+                precioBase: 1400.00,
+                imagen: 'img/v-glucalose.jpg'
+            },
+            {
+                id: 'v-fortyflora',
+                nombre: 'V-Fortyflora',
+                categoria: 'Bienestar General',
+                subtitulo: 'Salud Intestinal y Microbiota',
+                beneficios: 'Reparación de tejidos, reducción de distensión abdominal y equilibrio de microbiota.',
+                ingredientes: 'Carbón vegetal, Sulfato de Magnesio, L-lisina, Carbonato de Calcio, Dióxido de Silicio.',
+                precioBase: 700.00,
+                imagen: 'img/v-itaren.jpg'
+            },
+            {
+                id: 'v-asculax',
+                nombre: 'V-Asculax',
+                categoria: 'Energía y Rendimiento',
+                subtitulo: 'Salud Cardiovascular y Circulatoria',
+                beneficios: 'Mejora el flujo sanguíneo, reduce inflamación y apoya la elasticidad cardiovascular.',
+                ingredientes: 'Alcachofa, Romero, MSM, Cola de Caballo, Hamamelis, Ruda.',
+                precioBase: 700.00,
+                imagen: 'img/v-organex.jpg'
+            },
+            {
+                id: 'v-omega3',
+                nombre: 'V-Omega 3',
+                categoria: 'Bienestar General',
+                subtitulo: 'Omega 3 con Astaxantina',
+                beneficios: 'Ayuda a prevenir infartos, fortalece neuronas, cerebro y nivelación de triglicéridos.',
+                ingredientes: 'Aceite de Salmón Salvaje de Alaska, Astaxantina, Vitaminas A, D3, Glicerina.',
+                precioBase: 1500.00,
+                imagen: 'img/v-te-detox.jpg'
+            },
+            {
+                id: 'v-italay',
+                nombre: 'V-Italay',
+                categoria: 'Bienestar General',
+                subtitulo: 'Tranquilidad y Sueño Reparador',
+                beneficios: 'Brinda tranquilidad, promueve la calma y disminuye estrés, ansiedad e insomnio.',
+                ingredientes: 'Té Verde, Pasiflora, Valeriana, Menta, Hierba Tumba Vaquero.',
+                precioBase: 700.00,
+                imagen: 'img/v-glucalose.jpg'
+            },
+            {
+                id: 'v-curcumax',
+                nombre: 'V-Curcumax',
+                categoria: 'Cuidado Hepático/Renal',
+                subtitulo: 'Cúrcuma y Reparación Tisular',
+                beneficios: 'Fortalece sistema inmune, alivia molestias articulares y repara flora intestinal.',
+                ingredientes: 'Cúrcuma, MSM, Condroitina, Vitamina C, Selenio.',
+                precioBase: 850.00,
+                imagen: 'img/v-itaren.jpg'
+            },
+            {
+                id: 'v-control',
+                nombre: 'V-Control',
+                categoria: 'Control de Peso',
+                subtitulo: 'Metabolismo y Saciedad',
+                beneficios: 'Estimula la tiroides, apoya al metabolismo y ayuda a la pérdida de grasa.',
+                ingredientes: 'Toronjil, Tejocote, Alga Espirulina, Acerola, Nopal.',
+                precioBase: 700.00,
+                imagen: 'img/v-te-detox.jpg'
+            },
+            {
+                id: 'v-italboost',
+                nombre: 'V-Italboost',
+                categoria: 'Bienestar General',
+                subtitulo: 'Antibiótico Natural e Inmunidad',
+                beneficios: 'Actúa como antibiótico natural, fortalece defensas y alivia rinitis o bronquitis.',
+                ingredientes: 'Ajo, Flor de equinácea, Vitamina C, Jengibre, Canela, Cúrcuma, Vitamina D3.',
+                precioBase: 850.00,
+                imagen: 'img/v-organex.jpg'
+            },
+            {
+                id: 'v-harmony',
+                nombre: 'V-Harmony',
+                categoria: 'Bienestar General',
+                subtitulo: 'Equilibrio Hormonal Femenino',
+                beneficios: 'Apoya el equilibrio hormonal, salud metabólica, manejo del estrés y bienestar integral.',
+                ingredientes: 'Vitamina E, B6, Magnesio, Zinc, Myo-inositol, D-chiro inositol, Resveratrol.',
+                precioBase: 800.00,
+                imagen: 'img/v-glucalose.jpg'
+            },
+            {
+                id: 'v-prime',
+                nombre: 'V-Prime',
+                categoria: 'Energía y Rendimiento',
+                subtitulo: 'Vitalidad y Rendimiento Masculino',
+                beneficios: 'Apoya la energía masculina, rendimiento físico, mental y salud prostática.',
+                ingredientes: 'Vitamina D3, K2, Boro, Zinc, Fenogreco, Maca, Saw Palmetto, Ashwagandha.',
+                precioBase: 800.00,
+                imagen: 'img/v-itaren.jpg'
+            },
+            {
+                id: 'vitalpro',
+                nombre: 'Vitalpro (Proteína)',
+                categoria: 'Energía y Rendimiento',
+                subtitulo: 'Proteína de Suero & Superfoods',
+                beneficios: 'Mejora nivel cognitivo, fortalece sistema inmune y aporta energía con aminoácidos.',
+                ingredientes: 'Aislado de proteína de suero y soya, Colágeno hidrolizado, Inulina, Ganoderma, Maca.',
+                precioBase: 1500.00,
+                imagen: 'img/v-te-detox.jpg'
+            },
+            {
+                id: 'v-smoothie',
+                nombre: 'V Smoothie',
+                categoria: 'Control de Peso',
+                subtitulo: 'Malteada Nutricional Avanzada',
+                beneficios: 'Energía diaria estable, soporte inmune, antioxidantes y control glucémico.',
+                ingredientes: 'Proteína aislada de soya, Leche de coco, Reishi, Shiitake, Cordyceps, Omega 3.',
+                precioBase: 900.00,
+                imagen: 'img/v-organex.jpg'
+            },
+            {
+                id: 'v-performance',
+                nombre: 'V Performance+',
+                categoria: 'Energía y Rendimiento',
+                subtitulo: 'Pre-Entreno y Electrolitos',
+                beneficios: 'Impulsa energía física, mental, potencia muscular y recuperación post-entrenamiento.',
+                ingredientes: 'Complejo de magnesio, Creatina, Aminoácidos esenciales, Citrato de potasio.',
+                precioBase: 950.00,
+                imagen: 'img/v-itaren.jpg'
+            },
+            {
+                id: 'nourish-plus',
+                nombre: 'Nourish +',
+                categoria: 'Bienestar General',
+                subtitulo: 'Malteada Vegetal All-In-One',
+                beneficios: 'Apoya el sistema inmune, favorece digestión, concentración y saciedad sostenida.',
+                ingredientes: 'Proteína vegetal (chícharo, arroz, cáñamo), Hongos adaptógenos, Probióticos.',
+                precioBase: 950.00,
+                imagen: 'img/v-glucalose.jpg'
+            },
+            {
+                id: 'v-nrgy',
+                nombre: 'V-NRGY',
+                categoria: 'Cafés Funcionales',
+                subtitulo: 'Bebida Energética Tropical',
+                beneficios: 'Promueve energía natural, mejora estado de ánimo y apoyo en pérdida de peso.',
+                ingredientes: 'Guaraná, Quercetina, DMAE, Cafeína verde, Vitaminas del complejo B, L-Carnitina.',
+                precioBase: 800.00,
+                imagen: 'img/v-te-detox.jpg'
+            },
+            {
+                id: 'v-nitro',
+                nombre: 'V-Nitro Gotas',
+                categoria: 'Energía y Rendimiento',
+                subtitulo: 'Óxido Nítrico Sublingual',
+                beneficios: 'Mejora salud sexual, circulación, salud cardiovascular y energía general.',
+                ingredientes: 'L-Arginina, L-Citrulina, Betabel, Noni, Moringa, Espinaca Roja.',
+                precioBase: 1200.00,
+                imagen: 'img/v-organex.jpg'
+            },
+            {
+                id: 'vitalage-collagen',
+                nombre: 'Vitalage Collagen',
+                categoria: 'Bienestar General',
+                subtitulo: 'Péptidos Bioactivos de Colágeno',
+                beneficios: 'Promueve huesos sanos, piel radiante, cabello brillante y alivio articular.',
+                ingredientes: 'Péptidos de colágeno bovino y marino I, II, III, Caldo de hueso, Ácido hialurónico.',
+                precioBase: 1440.00,
+                imagen: 'img/v-itaren.jpg'
+            },
+            {
+                id: 'v-daily',
+                nombre: 'V-Daily Multivitamínico',
+                categoria: 'Bienestar General',
+                subtitulo: 'Polvo Multivitamínico Avanzado',
+                beneficios: 'Multivitamínico completo, impulsa energía, concentración y refuerzo inmune.',
+                ingredientes: 'Vitaminas A, C, D3, E, K, Complejo B, Probióticos, Hongos adaptógenos.',
+                precioBase: 1600.00,
+                imagen: 'img/v-glucalose.jpg'
+            },
+            {
+                id: 'thermokafe',
+                nombre: 'Thermokafe',
+                categoria: 'Cafés Funcionales',
+                subtitulo: 'Café Gourmet Termogénico',
+                beneficios: 'Acelera metabolismo, controla apetito, transforma grasa en energía y nivela azúcar.',
+                ingredientes: 'Café arábigo, L-Carnitina, Guaraná, Garcinia Cambogia, Té Verde, Ginseng.',
+                precioBase: 900.00,
+                imagen: 'img/v-te-detox.jpg'
+            },
+            {
+                id: 'lovkafe',
+                nombre: 'Lovkafe',
+                categoria: 'Cafés Funcionales',
+                subtitulo: 'Café Gourmet de Vitalidad Sexual',
+                beneficios: 'Promueve fertilidad, revitaliza vida sexual y mejora circulación y equilibrio hormonal.',
+                ingredientes: 'Café arábigo, Tongkat Ali, Tribulus terrestris, Ginseng, Raíz de Maca, L-Arginina.',
+                precioBase: 900.00,
+                imagen: 'img/v-organex.jpg'
+            },
+            {
+                id: 'neurokafe',
+                nombre: 'Neurokafe',
+                categoria: 'Cafés Funcionales',
+                subtitulo: 'Café Gourmet Nootrópico',
+                beneficios: 'Protege salud cognitiva, reduce estrés oxidativo, mejora memoria y concentración.',
+                ingredientes: 'Café arábigo, Inulina, Probióticos, Hongo Ganoderma, Ginseng, Ácido Fúlvico.',
+                precioBase: 900.00,
+                imagen: 'img/v-itaren.jpg'
+            },
+            {
+                id: 'lattekafe',
+                nombre: 'Lattekafe',
+                categoria: 'Cafés Funcionales',
+                subtitulo: 'Café con 10 Hongos Adaptógenos',
+                beneficios: 'Claridad mental, enfoque, soporte inmune y energía sin ansiedad.',
+                ingredientes: 'Café arábigo, Seta rey, Melena de León, Reishi, Cordyceps, Shiitake, Chaga.',
+                precioBase: 1200.00,
+                imagen: 'img/v-glucalose.jpg'
+            },
+            {
+                id: 'ketokafe-bhb',
+                nombre: 'Ketokafe-BHB',
+                categoria: 'Cafés Funcionales',
+                subtitulo: 'Café Cetogénico con Sales BHB',
+                beneficios: 'Aumenta energía, mejora concentración, reduce apetito y promueve cetosis.',
+                ingredientes: 'Café arábigo, Magnesio, Calcio y Sodio beta-hidroxibutirato.',
+                precioBase: 1250.00,
+                imagen: 'img/v-te-detox.jpg'
+            },
+            {
+                id: 'keto-plus-bhb',
+                nombre: 'Keto Plus BHB',
+                categoria: 'Control de Peso',
+                subtitulo: 'Sales Cetogénicas Avanzadas',
+                beneficios: 'Eleva rendimiento físico, promueve cetosis, claridad mental y función neuromuscular.',
+                ingredientes: 'Beta-hidroxibutirato de calcio, magnesio, sodio y potasio, Arándano, Acai.',
+                precioBase: 1800.00,
+                imagen: 'img/v-organex.jpg'
+            },
+            {
+                id: 'genius-shake',
+                nombre: 'Genius Shake (Einstein Kids)',
+                categoria: 'Línea Infantil Einstein Kids',
+                subtitulo: 'Nutrición Infantil y Cognitiva',
+                beneficios: 'Apoya desarrollo cognitivo, neurológico, combate estrés y fortalece sistema inmune.',
+                ingredientes: 'Aislado de proteína de suero, Uva, Kiwi, Cocoa, Frutas, Verduras y Omega 3.',
+                precioBase: 1400.00,
+                imagen: 'img/v-itaren.jpg'
+            },
+            {
+                id: 'd-fence',
+                nombre: 'D Fence (Einstein Kids)',
+                categoria: 'Línea Infantil Einstein Kids',
+                subtitulo: 'Protección Neuronal e Inmune Infantil',
+                beneficios: 'Protege células cerebrales, desarrollo neurológico y previene enfermedades.',
+                ingredientes: 'Inulina de agave, Limón, Vitamina C, Treonato de magnesio, Cúrcuma, Zinc, Vitamina D3.',
+                precioBase: 800.00,
+                imagen: 'img/v-glucalose.jpg'
+            },
+            {
+                id: 'smartbiotics',
+                nombre: 'Smartbiotics (Einstein Kids)',
+                categoria: 'Línea Infantil Einstein Kids',
+                subtitulo: 'Probióticos y Neurodesarrollo Infantil',
+                beneficios: 'Mejora digestión, impulsa el aprendizaje, retiene información y equilibra flora intestinal.',
+                ingredientes: 'Lactobacillus acidophilus, Rhamnosus GG, Bifidobacterium lactis, Inulina de agave.',
+                precioBase: 800.00,
+                imagen: 'img/v-te-detox.jpg'
+            },
+            {
+                id: 'kit-detox-integral',
+                nombre: 'Kit Detox & Bienestar Total',
+                categoria: 'Kits Completos',
+                subtitulo: 'Pack Dual Depurativo',
+                beneficios: 'Combinación ideal de depuración hepática e infusión purificante para resultados óptimos a domicilio.',
+                ingredientes: 'Incluye V-Te Detox + V-Organex originales.',
+                precioBase: 1000.00,
+                imagen: 'img/v-organex.jpg'
+            }
+        ];
+
+        // Forzar limpieza y actualización del almacenamiento local para evitar categorías vacías
+     let productos = (() => {
+    try {
+        const guardados = localStorage.getItem('aura_productos');
+
+        if (guardados) {
+            const datos = JSON.parse(guardados);
+
+            if (Array.isArray(datos)) {
+                return datos;
+            }
+        }
+    } catch (error) {
+        console.warn('Error al cargar productos:', error);
+    }
+
+    return [...productosPorDefecto];
+})();
+        let categoriaActual = 'todos';
+        const COMISION = 0.20; // 20% margen oculto corporativo
+
+        const imagenesGitHub = {
+    'v-te-detox': 'V-Te Detox.jpg',
+    'v-organex': 'V-Organex.jpg',
+    'v-itaren': 'V-Itaren.jpg',
+    'v-glucalose': 'V-Glucalose S-Balance.jpg',
+    'v-itadol': 'V-Itadol.jpg',
+    'vitarly-l': 'Vitarly-L.jpg',
+    'v-glutation': 'V-Glutation Cápsulas.jpg',
+    'glutation-plus': 'Glutation Plus (Gotas).jpg',
+    'v-fortyflora': 'V-Fortyflora.jpg',
+    'v-asculax': 'V-Asculax.jpg',
+    'v-omega3': 'V-Omega 3.jpg',
+    'v-italay': 'V-Italay.jpg',
+    'v-curcumax': 'V-Curcumax.jpg',
+    'v-control': 'V-Control.jpg',
+    'v-italboost': 'V-Italboost.jpg',
+    'v-harmony': 'V-Harmony.jpg',
+    'v-prime': 'V-Prime.jpg',
+    'vitalpro': 'Vitalpro (Proteína).jpg',
+    'v-smoothie': 'V Smoothie.jpg',
+    'v-performance': 'V Performance+.jpg',
+    'nourish-plus': 'Nourish +.jpg',
+    'v-nrgy': 'V-NRGY.jpg',
+    'v-nitro': 'V-Nitro Gotas.jpg',
+    'vitalage-collagen': 'Vitalage Collagen.jpg',
+    'v-daily': 'V-Daily Multivitamínico.jpg',
+    'thermokafe': 'Thermokafe.jpg',
+    'lovkafe': 'Lovkafe.jpg',
+    'neurokafe': 'Neurokafe.jpg',
+    'lattekafe': 'Lattekafe.jpg',
+    'ketokafe-bhb': 'Ketokafe-BHB.jpg',
+    'keto-plus-bhb': 'Keto Plus BHB.jpg',
+    'genius-shake': 'Genius Shake (Einstein Kids).jpg',
+    'd-fence': 'D Fence (Einstein Kids).jpg',
+    'smartbiotics': 'Smartbiotics (Einstein Kids).jpg'
+};
+
+productos.forEach(producto => {
+    const archivo = imagenesGitHub[producto.id];
+
+    if (archivo) {
+        producto.imagen = 'https://raw.githubusercontent.com/pingar-spec/Aura-Wellness-Beauty/main/images_recuperadas/' +
+            encodeURIComponent(archivo);
+    }
+});
+
+        window.onload = function() {
+            renderizarCliente();
+        };
+
+        function cambiarVista(vista) {
+            document.querySelectorAll('.tab-section').forEach(s => s.classList.remove('active-tab'));
+            document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+            document.getElementById('vista-' + vista).classList.add('active-tab');
+            if(document.getElementById('nav-' + vista)) document.getElementById('nav-' + vista).classList.add('active');
+            window.scrollTo({top:0, behavior:'smooth'});
+        }
+
+        function filtrarCategoria(cat, btn) {
+            categoriaActual = cat;
+            document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active-cat'));
+            btn.classList.add('active-cat');
+            renderizarCliente();
+        }
+
+        function irAlLogin() {
+            document.getElementById('admin-pass').value = '';
+            document.getElementById('error-login').style.display = 'none';
+            cambiarVista('login');
+        }
+
+        function verificarAdmin() {
+            let pass = document.getElementById('admin-pass').value;
+            if (pass === 'admin123') {
+                renderizarAdmin();
+                cambiarVista('admin');
+            } else {
+                document.getElementById('error-login').style.display = 'block';
+            }
+        }
+
+        function cerrarSesionAdmin() {
+            cambiarVista('suplementos');
+        }
+
+        function renderizarCliente() {
+            let grid = document.getElementById('grid-suplementos');
+            grid.innerHTML = '';
+            let filtrados = categoriaActual === 'todos' ? productos : productos.filter(p => p.categoria === categoriaActual);
+            
+            if (filtrados.length === 0) {
+                grid.innerHTML = '<p style="grid-column: 1/-1; text-align:center; color:var(--text-muted);">No hay productos en esta categoría.</p>';
+                return;
+            }
+
+            filtrados.forEach(p => {
+                let precioFinal = p.precioBase * (1 + COMISION);
+                grid.innerHTML += `
+                    <div class="card">
+                        <div>
+                            <div class="card-img-container">
+                                <img src="${p.imagen}" alt="${p.nombre}">
+                            </div>
+                            <h3>${p.nombre}</h3>
+                            <div class="subtitle">${p.subtitulo}</div>
+                            <div class="info-block"><strong>Beneficios:</strong> ${p.beneficios}</div>
+                            <div class="info-block"><strong>Ingredientes:</strong> ${p.ingredientes}</div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="price">S/ ${precioFinal.toFixed(2)}</div>
+                            <button class="btn" onclick="agregarAlCarrito('${p.nombre}', ${p.precioBase})">Agregar</button>
+                        </div>
+                    </div>
+                `;
+            });
+
+        }
+
+        function renderizarAdmin() {
+            let grid = document.getElementById('grid-admin');
+            grid.innerHTML = '';
+            productos.forEach((p, index) => {
+                grid.innerHTML += `
+                    <div class="card">
+                        <div>
+                            <label style="font-size:11px; font-weight:700; color:var(--primary-main); text-transform:uppercase; margin-bottom:6px; display:block;">📸 Imagen del Producto (Arrastra o haz clic):</label>
+                            <div class="admin-drop-zone" onclick="document.getElementById('file-${index}').click()" ondragover="event.preventDefault()" ondrop="manejarDropAdmin(event, ${index})">
+                                <img id="admin-img-preview-${index}" src="${p.imagen}" alt="${p.nombre}">
+                                <div class="drop-hint">🔄 Cambiar Imagen</div>
+                            </div>
+                            <input type="file" id="file-${index}" accept="image/*" style="display:none;" onchange="manejarInputAdmin(this, ${index})">
+
+                            <div class="admin-controls">
+                                <label>⚙️ Precio Base (S/):</label>
+                                <input type="number" step="0.01" id="admin-precio-${index}" value="${p.precioBase}" oninput="actualizarPreviewAdmin(${index})">
+                                <label style="font-size:11px; color:var(--primary-main);">💰 Precio con +20%: S/ <span id="admin-calc-${index}">${(p.precioBase * (1 + COMISION)).toFixed(2)}</span></label>
+                            </div>
+                            <h3>${p.nombre}</h3>
+                            <div class="subtitle">${p.subtitulo}</div>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function actualizarPreviewAdmin(index) {
+            let val = parseFloat(document.getElementById(`admin-precio-${index}`).value) || 0;
+            document.getElementById(`admin-calc-${index}`).innerText = (val * (1 + COMISION)).toFixed(2);
+        }
+
+        function manejarInputAdmin(input, index) {
+            if (input.files && input.files[0]) {
+                let lector = new FileReader();
+                lector.onload = function(e) {
+                    productos[index].imagen = e.target.result;
+                    document.getElementById(`admin-img-preview-${index}`).src = e.target.result;
+                }
+                lector.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function manejarDropAdmin(e, index) {
+            e.preventDefault();
+            if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+                let lector = new FileReader();
+                lector.onload = function(evento) {
+                    productos[index].imagen = evento.target.result;
+                    document.getElementById(`admin-img-preview-${index}`).src = evento.target.result;
+                }
+                lector.readAsDataURL(e.dataTransfer.files[0]);
+            }
+        }
+
+        function guardarYVolver() {
+            productos.forEach((p, index) => {
+                let nuevoPrecio = parseFloat(document.getElementById(`admin-precio-${index}`).value);
+                if (!isNaN(nuevoPrecio)) p.precioBase = nuevoPrecio;
+            });
+            localStorage.setItem('aura_productos', JSON.stringify(productos));
+            renderizarCliente();
+            alert('✅ ¡Cambios guardados con éxito! La tienda se ha actualizado.');
+            cambiarVista('suplementos');
+        }
+
+        let carrito = [];
+        function agregarAlCarrito(nombre, precioBase) {
+            let precioFinal = precioBase * (1 + COMISION);
+            let item = carrito.find(i => i.nombre === nombre);
+            if (item) item.cantidad++;
+            else carrito.push({nombre, precio: precioFinal, cantidad: 1});
+            actualizarCarrito();
+            alert('✨ ¡' + nombre + ' agregado al carrito!');
+        }
+
+        function actualizarCarrito() {
+            let c = document.getElementById('cart-items-container');
+            let t = document.getElementById('cart-total-text');
+            let cnt = document.getElementById('cart-count');
+            c.innerHTML = '';
+            let total = 0, totalItems = 0;
+            if (carrito.length === 0) {
+                c.innerHTML = '<p style="color:var(--text-muted)">Tu carrito está vacío.</p>';
+                t.innerText = 'Total: S/ 0.00';
+                cnt.innerText = '0';
+                return;
+            }
+            carrito.forEach(i => {
+                let sub = i.precio * i.cantidad;
+                total += sub; totalItems += i.cantidad;
+                c.innerHTML += `<div class="cart-item"><span><strong>${i.cantidad}x</strong> ${i.nombre}</span><span style="font-weight:bold; color:var(--primary-main)">S/ ${sub.toFixed(2)}</span></div>`;
+            });
+            t.innerText = `Total: S/ ${total.toFixed(2)}`;
+            cnt.innerText = totalItems;
+        }
+
+        function enviarWhatsApp() {
+            let nom = document.getElementById('cliente-nombre').value.trim();
+            let dir = document.getElementById('cliente-direccion').value.trim();
+            let tel = document.getElementById('cliente-telefono').value.trim();
+            
+            if (carrito.length === 0 || !nom || !dir || !tel) {
+                alert('Por favor complete todos los datos de envío y agregue productos.');
+                return;
+            }
+
+            let mensajeTexto = "PEDIDO AURA WELLNESS & BEAUTY\n";
+            mensajeTexto += "Cliente: " + nom + "\n";
+            mensajeTexto += "Dirección (El Agustino): " + dir + "\n";
+            mensajeTexto += "Teléfono: " + tel + "\n\n";
+            mensajeTexto += "Detalle de Suplementos:\n";
+
+            let total = 0;
+            carrito.forEach(i => {
+                let sub = i.precio * i.cantidad;
+                total += sub;
+                mensajeTexto += "- " + i.cantidad + "x " + i.nombre + " (S/ " + sub.toFixed(2) + ")\n";
+            });
+
+            mensajeTexto += "\nTOTAL GENERAL: S/ " + total.toFixed(2);
+
+            let url = "https://wa.me/51940815597?text=" + encodeURIComponent(mensajeTexto);
+            window.open(url, '_blank');
+        }
+
+        function agendarServicioWhatsApp() {
+            let serv = document.getElementById('booking-servicio').value;
+            let zona = document.getElementById('booking-zona').value;
+            let fecha = document.getElementById('booking-fecha').value;
+            let nom = document.getElementById('booking-nombre').value.trim();
+            let tel = document.getElementById('booking-telefono').value.trim();
+            let dir = document.getElementById('booking-direccion').value.trim();
+
+            if (!fecha || !nom || !tel || !dir) {
+                alert('Por favor complete todos los campos de la reserva.');
+                return;
+            }
+
+            let mensajeCita = "RESERVA DE ESTÉTICA A DOMICILIO\n";
+            mensajeCita += "Servicio: " + serv + "\n";
+            mensajeCita += "Zona: " + zona + "\n";
+            mensajeCita += "Fecha: " + fecha + "\n";
+            mensajeCita += "Cliente: " + nom + "\n";
+            mensajeCita += "Teléfono: " + tel + "\n";
+            mensajeCita += "Dirección: " + dir;
+
+            let urlCita = "https://wa.me/51940815597?text=" + encodeURIComponent(mensajeCita);
+            window.open(urlCita, '_blank');
+        }
+    </script>
+</body>
+</html>
